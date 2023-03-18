@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "Blurred thumbnails",
+  "version": "1.0.0",
+  "description": "Blur thumbnails on YT page for whatever reason",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "host_permissions": [
+    "https://www.youtube.com/*"
+  ],
+  "options_page": "options/index.html",
+  "background": {
+    "service_worker": "hook/onInstall.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/"
+      ],
+      "js": [
+        "content/selectors/home.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/watch?*"
+      ],
+      "js": [
+        "content/selectors/watch.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/results?*"
+      ],
+      "js": [
+        "content/selectors/results.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/",
+        "https://www.youtube.com/watch?*",
+        "https://www.youtube.com/results?*"
+      ],
+      "js": [
+        "content/blur.js",
+        "content/index.js"
+      ],
+      "css": [
+        "content/style.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ]
+}
