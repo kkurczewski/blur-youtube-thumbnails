@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div id="root">
+        <span id="version">Blur <span>YouTube</span> thumbnails - v1.0</span>
+
+        <h2>Channels</h2>
+        <fieldset id="channels">
+
+            <span class="section">Whitelist</span>
+            <ul class="whitelist" spellcheck="false">
+                <li contenteditable="plaintext-only"></li>
+            </ul>
+
+            <span class="section">Blacklist</span>
+            <ul class="blacklist" spellcheck="false">
+                <li contenteditable="plaintext-only"></li>
+            </ul>
+        </fieldset>
+
+        <h2>Keywords</h2>
+        <fieldset id="keywords">
+
+            <span class="section">Whitelist</span>
+            <ul class="whitelist" spellcheck="false">
+                <li contenteditable="plaintext-only"></li>
+            </ul>
+
+            <span class="section">Blacklist</span>
+            <ul class="blacklist" spellcheck="false">
+                <li contenteditable="plaintext-only"></li>
+            </ul>
+        </fieldset>
+
+        <button id="save">Save</button>
+
+        <script type="text/javascript" src="storage.js"></script>
+        <script type="text/javascript" src="editableList.js"></script>
+        <script type="text/javascript" src="index.js"></script>
+    </div>
+</body>
+
+</html>
