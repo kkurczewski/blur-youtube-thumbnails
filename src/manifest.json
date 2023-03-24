@@ -18,36 +18,14 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.youtube.com/"
+        "https://www.youtube.com/*"
       ],
       "js": [
-        "content/selectors/home.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://www.youtube.com/watch?*"
-      ],
-      "js": [
-        "content/selectors/watch.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://www.youtube.com/results?*"
-      ],
-      "js": [
-        "content/selectors/results.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://www.youtube.com/",
-        "https://www.youtube.com/watch?*",
-        "https://www.youtube.com/results?*"
-      ],
-      "js": [
+        "content/selectors/home.js",
+        "content/selectors/watch.js",
+        "content/selectors/results.js",
         "content/blur.js",
+        "content/mutationObserver.js",
         "content/index.js"
       ],
       "css": [

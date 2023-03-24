@@ -28,7 +28,9 @@ window.onload = async () => {
       li.textContent = entry
       list.append(li)
     })
-    firstElement.remove()
+    if (entries.length > 0) {
+      firstElement.remove()
+    }
   }
 }
 
