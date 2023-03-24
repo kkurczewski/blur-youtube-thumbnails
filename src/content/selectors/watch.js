@@ -12,7 +12,7 @@ const watch = (() => {
     })()
     return {
         selectors,
-        apply: async (callback) => {
+        process: async (callback) => {
             const videos = await find(document.body, "ytd-watch-next-secondary-results-renderer #items")
             observe(videos, selectors.video, callback)
             callback(videos.querySelectorAll(selectors.video))

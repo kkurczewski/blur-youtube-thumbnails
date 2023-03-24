@@ -12,7 +12,7 @@ const results = (() => {
     })()
     return {
         selectors,
-        apply: async (callback) => {
+        process: async (callback) => {
             const container = await find(document.body, "ytd-section-list-renderer")
             const sections = container.querySelector("#contents.ytd-section-list-renderer")
             const observeNode = (root) => observe(root, selectors.video, callback)

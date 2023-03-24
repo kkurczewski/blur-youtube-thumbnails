@@ -12,7 +12,7 @@ const home = (() => {
     })()
     return {
         selectors,
-        apply: async (callback) => {
+        process: async (callback) => {
             const container = await find(document.body, "#contents.ytd-rich-grid-renderer")
             observe(container, "ytd-rich-grid-row", (rows) => {
                 rows.forEach(row => callback(row.querySelectorAll(selectors.video)))

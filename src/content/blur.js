@@ -1,14 +1,14 @@
 const CSS_BLUR = "blur"
 
-const titleBlacklist = [];
-const titleWhitelist = [];
-const channelBlacklist = [];
-const channelWhitelist = [];
+function blur(video, options) {
+    const { channels, keywords } = options
+    const channelWhitelist = channels.whitelist
+    const channelBlacklist = channels.blacklist
+    const titleWhitelist = keywords.whitelist
+    const titleBlacklist = keywords.blacklist
 
-function blur(video) {
     if (isBlacklisted(video) && !isWhitelisted(video)) {
         video.node.classList.add(CSS_BLUR)
-        console.debug("Blurred", video.title)
     }
 
     function isBlacklisted(video) {
