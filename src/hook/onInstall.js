@@ -7,4 +7,9 @@ const keywords = {
     blacklist: [".*"],
 }
 
-chrome.runtime.onInstalled.addListener(() => chrome.storage.local.set({ channels, keywords }));
+chrome.runtime.onInstalled.addListener(async () => {
+    const options = await chrome.storage.local.get()
+    if (!options) {
+        chrome.storage.local.set({ channels, keywords })
+    }
+});
