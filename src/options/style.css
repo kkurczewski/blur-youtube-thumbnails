@@ -22,12 +22,12 @@ body {
 }
 
 #version span {
-    background-color: red;
-    color: white;
-    border-radius: 3px;
-    padding: 3px;
-    font-weight: bold;
-    margin: 3px;
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+  padding: 3px;
+  font-weight: bold;
+  margin: 3px;
 }
 
 .whitelist li {
@@ -54,24 +54,6 @@ body {
   font-weight: normal;
 }
 
-#save {
-  color: whitesmoke;
-  font-weight: bold;
-  padding: 7px;
-  background: #1A73E8;
-  border-radius: 3px;
-  box-shadow: var(--shadow);
-  border-width: 0;
-  cursor: pointer;
-}
-
-#save:hover {
-  background: #317FE8;
-  border-radius: 3px;
-  box-shadow: var(--shadow);
-  border-width: 0;
-}
-
 h2 {
   font-size: medium;
   font-weight: 300;
@@ -95,14 +77,40 @@ ul li {
 fieldset {
   display: grid;
   border-radius: 6px;
-  border-width: 0;
+  border: none;
   box-shadow: var(--shadow);
   background-color: white;
 }
 
 fieldset .section {
-  font-size: 110%;
+  font-size: small;
   font-weight: 200;
   border-bottom: 1px #d8d8d8 solid;
   padding-bottom: 3px;
+}
+
+#save {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+#save:hover {
+  background: #317FE8 radial-gradient(circle, transparent 1%, #317FE8 1%) center/15000%;
+}
+
+#save:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+#save {
+  border: none;
+  border-radius: 3px;
+  padding: 7px;
+  cursor: pointer;
+  color: whitesmoke;
+  font-weight: bold;
+  background-color: #1A73E8;
+  box-shadow: var(--shadow);
 }
