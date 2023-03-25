@@ -3,8 +3,9 @@ Extension that allows to selectively blur thumbnails on Youtube videos.
 
 ### Configuration options
 
-* Channel name
-* Keywords in video title
+* Whitelist & blacklist
+    * Channel name
+    * Keywords in video title
 
 ### Example
 
