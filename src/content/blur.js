@@ -12,15 +12,15 @@ function blur(video, options) {
     }
 
     function isBlacklisted(video) {
-        const blackListedChannel = channelBlacklist.some(it => video.channel.match(it) != null)
-        const blackListedTitle = titleBlacklist.some(it => video.title.match(it) != null)
+        const blackListedChannel = channelBlacklist.some(it => video.channel.match(RegExp(it, "i")) != null)
+        const blackListedTitle = titleBlacklist.some(it => video.title.match(RegExp(it, "i")) != null)
 
         return blackListedChannel || blackListedTitle
     }
 
     function isWhitelisted(video) {
-        const whitelistedChannel = channelWhitelist.some(it => video.channel.match(it) != null)
-        const whitelistedTitle = titleWhitelist.some(it => video.title.match(it) != null)
+        const whitelistedChannel = channelWhitelist.some(it => video.channel.match(RegExp(it, "i")) != null)
+        const whitelistedTitle = titleWhitelist.some(it => video.title.match(RegExp(it, "i")) != null)
 
         return whitelistedChannel || whitelistedTitle
     }

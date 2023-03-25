@@ -1,10 +1,10 @@
 const channels = {
     whitelist: ["add new channels here"],
-    blacklist: ["add new keywords here"],
+    blacklist: [""],
 }
 const keywords = {
-    whitelist: ["add new keywords here"],
-    blacklist: ["add new keywords here"],
+    whitelist: [],
+    blacklist: [".*"],
 }
 
 chrome.runtime.onInstalled.addListener(() => chrome.storage.local.set({ channels, keywords }));
