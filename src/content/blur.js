@@ -1,7 +1,6 @@
 const CSS_BLUR = "blur"
 
-function blur(video, options) {
-    const { channels, keywords } = options
+function blur(video, channels, keywords) {
     const channelWhitelist = channels.whitelist
     const channelBlacklist = channels.blacklist
     const titleWhitelist = keywords.whitelist

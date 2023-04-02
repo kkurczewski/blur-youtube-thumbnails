@@ -1,30 +1,28 @@
 // search results
 
 const results = (() => {
-    const selectors = (() => {
-        const channelSelector = "#meta .ytd-channel-name a"
-        const titleSelector = "#video-title"
-        return {
-            video: `ytd-video-renderer:has(ytd-thumbnail):has(${channelSelector}):has(${titleSelector})`,
-            channel: channelSelector,
-            title: titleSelector,
-        }
-    })()
-    return {
-        selectors,
-        process: async (callback) => {
-            const container = await find(document.body, "ytd-section-list-renderer")
-            const sections = container.querySelector("#contents.ytd-section-list-renderer")
-            const observeNode = (root) => observe(root, selectors.video, callback)
+    const selectors = {
+        root: "#page-manager ytd-search",
+        channel: "#meta .ytd-channel-name a",
+        title: "#video-title",
+    }
+    const videoSelector = `ytd-video-renderer:has(ytd-thumbnail):has(${selectors.channel}):has(${selectors.title})`
 
-            const initialSection = sections.querySelector("ytd-item-section-renderer")
+    return {
+        path: "/results",
+        selectors,
+        process: async (root, callback) => {
+            const container = await find(root, "ytd-section-list-renderer")
+            const sections = container.querySelector("#contents.ytd-section-list-renderer")
+            const itemsObserver = DynamicObserver(videoSelector, callback)
+
+            const initialSection = await find(sections, "ytd-item-section-renderer")
             processSection(initialSection)
-            observe(sections, "ytd-item-section-renderer", sections => sections.forEach(processSection))
+
+            observe(sections, "ytd-item-section-renderer", processSection)
 
             function processSection(section) {
-                const videos = section.querySelector("#contents.ytd-item-section-renderer")
-                callback(videos.querySelectorAll(selectors.video))
-                observeNode(videos)
+                itemsObserver.observe(section.querySelector("#contents.ytd-item-section-renderer"))
             }
         }
     }
