@@ -9,7 +9,6 @@ const home = (() => {
     const videoSelector = `#content:has(ytd-thumbnail):has(${selectors.channel}):has(${selectors.title})`
 
     return {
-        path: "/",
         selectors,
         process: async (root, callback) => {
             const container = await find(root, "#contents.ytd-rich-grid-renderer")

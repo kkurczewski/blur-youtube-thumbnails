@@ -10,7 +10,6 @@ const results = (() => {
     const videoSelector = `ytd-video-renderer:has(ytd-thumbnail):has(${selectors.channel}):has(${selectors.title})`
 
     return {
-        path: "/results",
         selectors,
         process: async (root, callback) => {
             const container = await find(root, "ytd-section-list-renderer")

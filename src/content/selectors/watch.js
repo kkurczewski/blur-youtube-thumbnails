@@ -9,7 +9,6 @@ const watch = (() => {
     const videoSelector = `#items ytd-compact-video-renderer:has(ytd-thumbnail):has(${selectors.channel}):has(${selectors.title})`
 
     return {
-        path: "/watch",
         selectors,
         process: async (root, callback) => {
             const videos = await find(root, "ytd-watch-next-secondary-results-renderer #items")
