@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Blurred thumbnails",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Blur thumbnails on YT page for whatever reason",
   "icons": {
     "16": "icons/icon16.png",
