@@ -1,4 +1,4 @@
-async function find(target, selector, timeout = 15_000) {
+function find(target, selector, timeout = 15_000) {
     return new Promise((resolve, reject) => {
         const observer = new MutationObserver((_, observer) => {
             tryResolve(observer)
@@ -25,34 +25,11 @@ async function find(target, selector, timeout = 15_000) {
     })
 }
 
-function observe(target, selector, callback) {
+function observe(target, selector, callback, subtree = false) {
     const observer = new MutationObserver(onMutation)
-    const config = { childList: true }
+    const config = { childList: true, subtree }
     observer.observe(target, config)
-
-    function onMutation(mutations) {
-        mutations.forEach(({ addedNodes }) => {
-            addedNodes.forEach(node => {
-                if (node.matches?.(selector)) {
-                    callback(node)
-                }
-            })
-        })
-    }
-}
-
-/**
- * Reusable observer for multiple nodes
- */
-function DynamicObserver(selector, callback) {
-    const observer = new MutationObserver(onMutation)
-    const config = { childList: true }
-    return {
-        observe: (target) => {
-            observer.observe(target, config)
-            target.querySelectorAll(selector).forEach(callback)
-        }
-    }
+    target.querySelectorAll(selector).forEach(callback)
 
     function onMutation(mutations) {
         mutations.forEach(({ addedNodes }) => {

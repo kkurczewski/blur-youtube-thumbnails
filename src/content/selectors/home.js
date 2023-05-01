@@ -1,23 +1,21 @@
 // home page
 
-const home = (() => {
-    const selectors = {
-        root: "#page-manager ytd-browse[page-subtype=home]",
+async function homePageObserver(root, videoCallback) {
+    const home = {
+        root: "#page-manager > ytd-browse[page-subtype=home]",
+        scroll: ":has(> ytd-rich-grid-row)",
+        container: "ytd-rich-grid-row,:has(~ ytd-rich-grid-row):not(:last-child)",
         channel: "#details .ytd-channel-name",
         title: "#details #video-title",
     }
-    const videoSelector = `#content:has(ytd-thumbnail):has(${selectors.channel}):has(${selectors.title})`
 
-    return {
-        selectors,
-        process: async (root, callback) => {
-            const container = await find(root, "#contents.ytd-rich-grid-renderer")
-            observe(container, "ytd-rich-grid-row", processRow)
-            container.querySelectorAll("ytd-rich-grid-row").forEach(processRow)
+    const pageRoot = await find(root, home.root, null)
+    const scroll = await find(pageRoot, home.scroll)
 
-            function processRow(row) {
-                row.querySelectorAll(videoSelector).forEach(callback)
-            }
-        }
-    }
-})()
+    observe(scroll, home.container, container => {
+        // home grid is loaded synchronously
+        container.querySelectorAll(VIDEO_SELECTOR).forEach(video => {
+            videoCallback(new Video(video, home.channel, home.title))
+        })
+    })
+}

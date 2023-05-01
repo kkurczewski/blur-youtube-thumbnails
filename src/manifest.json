@@ -24,8 +24,9 @@
         "content/selectors/home.js",
         "content/selectors/watch.js",
         "content/selectors/results.js",
+        "content/observer/mutationObserver.js",
+        "content/commons.js",
         "content/blur.js",
-        "content/mutationObserver.js",
         "content/index.js"
       ],
       "css": [

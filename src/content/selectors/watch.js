@@ -1,19 +1,17 @@
 // watch page, right panel
 
-const watch = (() => {
-    const selectors = {
-        root: "#page-manager ytd-watch-flexy",
+async function watchPageObserver(root, videoCallback) {
+    const watch = {
+        root: "#page-manager > ytd-watch-flexy",
+        scroll: "#items.ytd-watch-next-secondary-results-renderer",
         channel: ".details #channel-name",
         title: ".details #video-title",
     }
-    const videoSelector = `#items ytd-compact-video-renderer:has(ytd-thumbnail):has(${selectors.channel}):has(${selectors.title})`
 
-    return {
-        selectors,
-        process: async (root, callback) => {
-            const videos = await find(root, "ytd-watch-next-secondary-results-renderer #items")
-            observe(videos, videoSelector, callback)
-            videos.querySelectorAll(selectors.video).forEach(callback)
-        }
-    }
-})()
+    const pageRoot = await find(root, watch.root, null)
+    const scroll = await find(pageRoot, watch.scroll)
+
+    observe(scroll, VIDEO_SELECTOR, video => {
+        videoCallback(new Video(video, watch.channel, watch.title))
+    }, true)
+}
