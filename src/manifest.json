@@ -25,7 +25,7 @@
         "content/selectors/watch.js",
         "content/selectors/results.js",
         "content/observer/mutationObserver.js",
-        "content/commons.js",
+        "content/video.js",
         "content/blur.js",
         "content/index.js"
       ],

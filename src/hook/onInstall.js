@@ -1,15 +1,15 @@
 const channels = {
-    whitelist: ["add new channels here"],
-    blacklist: [""],
+  whitelist: ["add new channels here"],
+  blacklist: [""],
 }
 const keywords = {
-    whitelist: [],
-    blacklist: [".*"],
+  whitelist: [],
+  blacklist: [".*"],
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
-    const options = await chrome.storage.local.get()
-    if (Object.entries(options).length === 0) {
-        chrome.storage.local.set({ channels, keywords })
-    }
-});
+  const options = await chrome.storage.local.get()
+  if (Object.entries(options).length === 0) {
+    chrome.storage.local.set({ channels, keywords })
+  }
+})

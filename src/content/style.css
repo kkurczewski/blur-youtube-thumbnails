@@ -1,5 +1,5 @@
 .blur .ytd-thumbnail img {
-      filter: blur(15px);
-      -webkit-filter: blur(15px);
-      background-color: transparent;
+  filter: blur(15px);
+  -webkit-filter: blur(15px);
+  background-color: transparent;
 }
