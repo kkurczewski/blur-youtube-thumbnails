@@ -5,7 +5,9 @@ window.addEventListener("load", async () => {
   watchPageObserver(pageManager, blurVideo)
   resultsPageObserver(pageManager, blurVideo)
 
-  function blurVideo(video) {
+  function blurVideo(videoElement) {
+    const video = new Video(videoElement)
+    video.onRecycled(it => blur(it, channels, keywords))
     blur(video, channels, keywords)
   }
 })
