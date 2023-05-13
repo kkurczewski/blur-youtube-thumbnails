@@ -30,26 +30,29 @@ body {
   margin: 3px;
 }
 
-.whitelist li {
+.whitelist .tag {
   background-color: yellowgreen;
   font-weight: 500;
   color: white;
 }
 
-.whitelist li:focus-visible {
+.whitelist .tag:focus-visible {
   outline-color: mediumseagreen;
-  outline-style: dashed;
-  font-weight: normal;
 }
 
-.blacklist li {
+.blacklist .tag {
   background-color: palevioletred;
   font-weight: 500;
   color: white;
 }
 
-.blacklist li:focus-visible {
+.blacklist .tag:focus-visible {
   outline-color: firebrick;
+}
+
+.tag:focus-visible {
+  background-color: #dddd;
+  color: initial;
   outline-style: dashed;
   font-weight: normal;
 }
@@ -61,17 +64,33 @@ h2 {
   margin-left: 0.5em;
 }
 
-ul {
+:has(> .tag) {
   display: inline-flex;
   flex-wrap: wrap;
   padding: 10px;
   gap: 10px;
 }
 
-ul li {
+.tag {
   display: inline-flex;
   padding: 5px;
   border-radius: 3px;
+}
+
+#matcher input, *:has(#matcher input:focus) .tag:not(.highlight) {
+  background-color: #dddd;
+  color: #0005;
+}
+
+#matcher input {
+  border: 0;
+  margin-top: 7px;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#matcher input:focus {
+  color: initial;
 }
 
 fieldset {
@@ -82,11 +101,12 @@ fieldset {
   background-color: white;
 }
 
-fieldset .section {
+h3 {
   font-size: small;
   font-weight: 200;
   border-bottom: 1px #d8d8d8 solid;
   padding-bottom: 3px;
+  margin-block: 0;
 }
 
 #save {

@@ -8,34 +8,38 @@
 
 <body>
   <div id="root">
-    <span id="version">Blur <span>YouTube</span> thumbnails - v1.0.3</span>
+    <span id="version">Blur <span>YouTube</span> thumbnails - v1.1.0</span>
 
     <h2>Channels</h2>
     <fieldset id="channels">
-
-      <span class="section">Whitelist</span>
+      <h3>Whitelist</h3>
       <ul class="whitelist" spellcheck="false">
-        <li contenteditable="plaintext-only"></li>
+        <li class="tag" contenteditable="plaintext-only"></li>
       </ul>
 
-      <span class="section">Blacklist</span>
+      <h3>Blacklist</h3>
       <ul class="blacklist" spellcheck="false">
-        <li contenteditable="plaintext-only"></li>
+        <li class="tag" contenteditable="plaintext-only"></li>
       </ul>
     </fieldset>
 
     <h2>Keywords</h2>
     <fieldset id="keywords">
-
-      <span class="section">Whitelist</span>
+      <h3>Whitelist</h3>
       <ul class="whitelist" spellcheck="false">
-        <li contenteditable="plaintext-only"></li>
+        <li class="tag" contenteditable="plaintext-only"></li>
       </ul>
 
-      <span class="section">Blacklist</span>
+      <h3>Blacklist</h3>
       <ul class="blacklist" spellcheck="false">
-        <li contenteditable="plaintext-only"></li>
+        <li class="tag" contenteditable="plaintext-only"></li>
       </ul>
+    </fieldset>
+
+    <h2>Test phrase</h2>
+    <fieldset id="matcher">
+      <h3>Input</h3>
+      <input type="text" placeholder="Type something to check which tags apply"></input>
     </fieldset>
 
     <button id="save">Save</button>
