@@ -1,4 +1,4 @@
-const VIDEO_SELECTOR = ":has(> ytd-thumbnail)"
+const VIDEO_SELECTOR = ":has(#thumbnail):has(#video-title)"
 
 class Video {
   #node
