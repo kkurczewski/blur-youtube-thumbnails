@@ -16,6 +16,7 @@ async function resultsPageObserver(root, videoCallback) {
 
   function videoObserver(container, videoCallback) {
     // videos in result list are loaded asynchronously
-    observe(container, VIDEO_SELECTOR, videoCallback, true)
+    const resultsVideoSelector = `${results.container} > ${VIDEO_SELECTOR}`
+    observe(container, resultsVideoSelector, videoCallback, true)
   }
 }

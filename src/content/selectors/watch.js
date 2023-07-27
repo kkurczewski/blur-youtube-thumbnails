@@ -9,5 +9,6 @@ async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, watch.root, null)
   const scroll = await find(pageRoot, watch.scroll)
 
-  observe(scroll, VIDEO_SELECTOR, videoCallback, true)
+  const watchVideoSelector = `${watch.scroll} > ${VIDEO_SELECTOR}`
+  observe(scroll, watchVideoSelector, videoCallback, true)
 }

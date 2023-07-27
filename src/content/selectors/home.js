@@ -12,6 +12,7 @@ async function homePageObserver(root, videoCallback) {
 
   observe(scroll, home.container, container => {
     // videos in grid row are loaded synchronously
-    container.querySelectorAll(VIDEO_SELECTOR).forEach(videoCallback)
+    const homeVideoSelector = `:only-child > :only-child${VIDEO_SELECTOR}`
+    container.querySelectorAll(homeVideoSelector).forEach(videoCallback)
   })
 }
