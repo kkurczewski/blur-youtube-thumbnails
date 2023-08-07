@@ -2,13 +2,12 @@
 
 async function watchPageObserver(root, videoCallback) {
   const watch = {
-    root: "#page-manager > ytd-watch-flexy",
-    scroll: "#items.ytd-watch-next-secondary-results-renderer",
+    player: "#page-manager > ytd-watch-flexy",
+    items: "#related #items",
   }
 
-  const pageRoot = await find(root, watch.root, null)
-  const scroll = await find(pageRoot, watch.scroll)
+  const playerContainer = await find(root, watch.player, null)
+  const itemsContainer = await find(playerContainer, watch.items, null)
 
-  const watchVideoSelector = `${watch.scroll} > ${VIDEO_SELECTOR}`
-  observe(scroll, watchVideoSelector, videoCallback, true)
+  observe(itemsContainer, VIDEO_SELECTOR, videoCallback, true)
 }

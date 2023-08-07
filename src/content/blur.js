@@ -4,7 +4,7 @@ function blur(video, channels, keywords) {
   const titleWhitelist = keywords.whitelist
   const titleBlacklist = keywords.blacklist
 
-  video.blur(isBlacklisted(video) && !isWhitelisted(video))
+  return video.blur(isBlacklisted(video) && !isWhitelisted(video))
 
   function isBlacklisted(video) {
     const blackListedChannel = channelBlacklist.some(it => video?.channel?.match(RegExp(it, "i")) != null) ?? false

@@ -1,4 +1,4 @@
-const VIDEO_SELECTOR = ":has(#thumbnail):has(#video-title)"
+const VIDEO_SELECTOR = "#dismissible:has(#video-title)"
 
 class Video {
   #node
@@ -7,8 +7,8 @@ class Video {
 
   constructor(node) {
     this.#node = node
-    this.#title = node.querySelector("#video-title")
     this.#channel = node.querySelector("ytd-channel-name")
+    this.#title = node.querySelector("#video-title")
   }
 
   get title() {
@@ -20,7 +20,7 @@ class Video {
   }
 
   blur(enabled) {
-    this.#node.classList.toggle("blur", enabled)
+    return this.#node.classList.toggle("blur", enabled)
   }
 
   onRecycled(callback) {

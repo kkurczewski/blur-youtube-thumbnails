@@ -1,13 +1,27 @@
 window.addEventListener("load", async () => {
   const { channels, keywords } = await chrome.storage.local.get()
   const pageManager = await find(document.body, "#page-manager")
-  homePageObserver(pageManager, blurVideo)
-  watchPageObserver(pageManager, blurVideo)
-  resultsPageObserver(pageManager, blurVideo)
+  homePageObserver(pageManager, blurVideo("home"))
+  watchPageObserver(pageManager, blurVideo("watch"))
+  resultsPageObserver(pageManager, blurVideo("results"))
 
-  function blurVideo(videoElement) {
-    const video = new Video(videoElement)
-    video.onRecycled(it => blur(it, channels, keywords))
-    blur(video, channels, keywords)
+  function blurVideo(metricName) {
+    return _blurVideo
+
+    function _blurVideo(videoElement) {
+      const video = new Video(videoElement)
+      video.onRecycled(it => {
+        _blur(it, channels, keywords)
+        console.count(`recycled video ${metricName}`)
+      })
+      _blur(video, channels, keywords)
+      console.count(`processed video ${metricName}`)
+
+      function _blur(video, channels, keywords) {
+        if (blur(video, channels, keywords)) {
+          console.count(`blurred video ${metricName}`)
+        }
+      }
+    }
   }
 })
