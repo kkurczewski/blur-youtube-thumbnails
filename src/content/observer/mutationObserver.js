@@ -1,49 +1,30 @@
-function find(target, selector, timeout = 15_000) {
-  return new Promise((resolve, reject) => {
-    console.time(`find ${selector}`)
-    const observer = new MutationObserver((_, observer) => {
-      tryResolve(observer)
-    })
+function find(target, selector) {
+  return new Promise(resolve => {
+    const observer = new MutationObserver((_, observer) => tryResolve(observer))
 
     const config = { childList: true, attributes: true }
     observer.observe(target, config)
     tryResolve(observer)
-
-    if (timeout) {
-      setTimeout(() => {
-        observer.disconnect()
-        reject(`Timeout for query: document.querySelector("${target.localName}${target.id ? '#' + target.id : ''} ${selector}")`)
-        console.timeEnd(`find ${selector}`)
-      }, timeout)
-    }
 
     function tryResolve(observer) {
       const node = target.querySelector(selector)
       if (node) {
         observer.disconnect()
         resolve(node)
-        console.timeEnd(`find ${selector}`)
       }
     }
   })
 }
 
-function observe(target, selector, callback, subtree = false) {
+function observeDirectChildrens(target, callback) {
   const observer = new MutationObserver(onMutation)
-  const config = { childList: true, subtree }
+  const config = { childList: true }
   observer.observe(target, config)
-  target.querySelectorAll(selector).forEach(callback)
+  Array.from(target.children).forEach(callback)
 
   function onMutation(mutations) {
     mutations.forEach(({ addedNodes }) => {
-      console.count(`processed mutation ${selector}`)
-      addedNodes.forEach(node => {
-        console.count(`processed node ${selector}`)
-        if (node.matches?.(selector)) {
-          callback(node)
-          console.count(`matched node ${selector}`)
-        }
-      })
+      addedNodes.forEach(callback)
     })
   }
 }

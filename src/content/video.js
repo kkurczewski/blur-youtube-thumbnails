@@ -1,4 +1,6 @@
-const VIDEO_SELECTOR = "#dismissible:has(#video-title)"
+const VIDEO_CONTAINER = "#dismissible"
+const VIDEO_TITLE = "#video-title"
+const VIDEO_SELECTOR = `${VIDEO_CONTAINER}:has(${VIDEO_TITLE}):not(:has(${VIDEO_CONTAINER}))`
 
 class Video {
   #node
@@ -9,6 +11,7 @@ class Video {
     this.#node = node
     this.#channel = node.querySelector("ytd-channel-name")
     this.#title = node.querySelector("#video-title")
+    console.debug("Processed video with title: ", this.#title.innerText)
   }
 
   get title() {

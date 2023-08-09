@@ -1,13 +1,10 @@
 // watch page, right panel
 
 async function watchPageObserver(root, videoCallback) {
-  const watch = {
-    player: "#page-manager > ytd-watch-flexy",
-    items: "#related #items",
-  }
+  const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
+  const scroll = await find(pageRoot, "#related #items")
 
-  const playerContainer = await find(root, watch.player, null)
-  const itemsContainer = await find(playerContainer, watch.items, null)
-
-  observe(itemsContainer, VIDEO_SELECTOR, videoCallback, true)
+  observeDirectChildrens(scroll, container => {
+    container.querySelectorAll(VIDEO_SELECTOR).forEach(videoCallback)
+  })
 }
