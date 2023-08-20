@@ -9,9 +9,9 @@ async function homePageObserver(root, videoCallback) {
       .querySelectorAll(VIDEO_SELECTOR)
       .forEach(videoCallback)
 
-    // on Chrome last row may load with one or two videos instead full row of four
-    // what is peculiar is fact that problem doesn't occur on Chromium
-    if (container.matches("ytd-rich-grid-row:last-of-type")) {
+    // last loaded row may load with one or two videos instead full row of four elements
+    // after scrolling down row is filled up but that elements are missed in top observer
+    if (container.matches("ytd-rich-grid-row:last-of-type:not(:first-child)")) {
       observeDirectChildrens(container.querySelector("#contents"), videoCallback)
     }
   })
