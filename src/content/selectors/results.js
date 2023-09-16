@@ -10,6 +10,6 @@ async function resultsPageObserver(root, videoCallback) {
       container
         .querySelectorAll(VIDEO_SELECTOR)
         .forEach(videoCallback)
-    }, false)
+    })
   })
 }
