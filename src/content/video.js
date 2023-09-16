@@ -6,11 +6,14 @@ class Video {
   #node
   #title
   #channel
+  #isShort
 
   constructor(node) {
+    console.assert(node != null)
     this.#node = node
     this.#channel = node.querySelector("ytd-channel-name #text")
     this.#title = node.querySelector("#video-title")
+    this.#isShort = this.#channel == ''
     console.debug("Processed video with title: ", this.#title.innerText)
   }
 
@@ -26,10 +29,12 @@ class Video {
     return this.#node.classList.toggle("blur", enabled)
   }
 
-  onRecycled(callback) {
-    const observer = new MutationObserver(() => callback(this))
-    const shortsConfig = { characterData: true, subtree: true }
-    const config = { childList: true, ...shortsConfig }
-    observer.observe(this.#title, config)
+  registerRecycler(recycler) {
+    const config = {
+      childList: !this.#isShort,
+      characterData: this.#isShort,
+      subtree: this.#isShort,
+    }
+    recycler.observe(this.#title, config)
   }
 }
