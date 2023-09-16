@@ -36,6 +36,8 @@ class DirectChildObserver {
 
   observe(target) {
     this.#observer.observe(target, { childList: true })
-    target.children.forEach(this.#callback)
+    for (const child of target.children) {
+      this.#callback(child)
+    }
   }
 }
