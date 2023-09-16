@@ -28,7 +28,8 @@ class Video {
 
   onRecycled(callback) {
     const observer = new MutationObserver(() => callback(this))
-    const config = { subtree: true, characterData: true }
+    const shortsConfig = { characterData: true, subtree: true }
+    const config = { childList: true, ...shortsConfig }
     observer.observe(this.#title, config)
   }
 }
