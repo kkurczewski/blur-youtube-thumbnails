@@ -17,14 +17,25 @@ function find(target, selector) {
 }
 
 function observeDirectChildrens(target, callback) {
-  const observer = new MutationObserver(onMutation)
-  const config = { childList: true }
-  observer.observe(target, config)
-  Array.from(target.children).forEach(callback)
+  const observer = new DirectChildObserver(callback)
+  observer.observe(target)
+}
 
-  function onMutation(mutations) {
-    mutations.forEach(({ addedNodes }) => {
-      addedNodes.forEach(callback)
+class DirectChildObserver {
+  #observer
+  #callback
+
+  constructor(callback) {
+    this.#observer = new MutationObserver(mutations => {
+      mutations.forEach(({ addedNodes }) => {
+        addedNodes.forEach(callback)
+      })
     })
+    this.#callback = callback
+  }
+
+  observe(target) {
+    this.#observer.observe(target, { childList: true })
+    target.children.forEach(this.#callback)
   }
 }
