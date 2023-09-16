@@ -9,17 +9,17 @@ class Video {
 
   constructor(node) {
     this.#node = node
-    this.#channel = node.querySelector("ytd-channel-name")
+    this.#channel = node.querySelector("ytd-channel-name #text")
     this.#title = node.querySelector("#video-title")
     console.debug("Processed video with title: ", this.#title.innerText)
   }
 
   get title() {
-    return this.#title.innerText
+    return this.#title.textContent
   }
 
   get channel() {
-    return this.#channel?.innerText // optional for shorts
+    return this.#channel.textContent // may be empty for shorts
   }
 
   blur(enabled) {
