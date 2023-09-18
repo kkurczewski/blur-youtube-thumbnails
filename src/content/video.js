@@ -36,5 +36,6 @@ class Video {
       subtree: this.#isShort,
     }
     recycler.observe(this.#title, config)
+    recycler.observe(this.#channel, config)
   }
 }
