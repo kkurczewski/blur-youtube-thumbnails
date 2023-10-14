@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Blurred thumbnails",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Blur thumbnails on YT page for whatever reason",
   "icons": {
     "16": "icons/icon16.png",
@@ -24,8 +24,10 @@
         "content/selectors/home.js",
         "content/selectors/watch.js",
         "content/selectors/results.js",
+        "content/selectors/playlists.js",
         "content/observer/mutationObserver.js",
         "content/video.js",
+        "content/playlistVideo.js",
         "content/blur.js",
         "content/index.js"
       ],
