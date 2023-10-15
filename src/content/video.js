@@ -1,7 +1,3 @@
-const VIDEO_CONTAINER = "#dismissible"
-const VIDEO_TITLE = "#video-title"
-const VIDEO_SELECTOR = `${VIDEO_CONTAINER}:has(${VIDEO_TITLE}):not(:has(${VIDEO_CONTAINER}))`
-
 class Video {
   #node
   #title

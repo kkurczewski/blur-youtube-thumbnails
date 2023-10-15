@@ -5,8 +5,8 @@ async function watchPageObserver(root, videoCallback) {
   const wrapper = await find(pageRoot, "#related #items")
 
   observeDirectChildrens(wrapper, container => {
-    const video = container.querySelector(VIDEO_SELECTOR)
-    // last child is continuation element and it doesn't have video
+    const video = container.querySelector(":has(#video-title)")
+    // last element is continuation and always results in null
     if (video != null) {
       videoCallback(video)
     }
