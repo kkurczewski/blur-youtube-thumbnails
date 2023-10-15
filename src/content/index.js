@@ -13,7 +13,7 @@ window.addEventListener("load", async () => {
       mutations.forEach(({ addedNodes }) => {
         addedNodes.forEach(node => {
           let containerNode = node.parentNode
-          while (!containerNode.matches(VIDEO_CONTAINER)) {
+          while (!containerNode.matches("#dismissible")) {
             containerNode = containerNode.parentNode
           }
           _blurVideo(containerNode)
