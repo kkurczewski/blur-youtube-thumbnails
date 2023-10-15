@@ -1,7 +1,10 @@
-// playlists, right panel
+// playlist page from results
 
-async function playlistObserver(root, videoCallback) {
-  const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
-  const container = await find(pageRoot, "#playlist #items")
-  container.childNodes.forEach(video => videoCallback(new PlaylistVideo(video)))
+async function playlistPageObserver(root, videoCallback) {
+  const pageRoot = await find(root, "#page-manager > ytd-browse[page-subtype=playlist]")
+  const playlistCover = await find(pageRoot, "ytd-playlist-header-renderer")
+  const playlistVideos = await find(pageRoot, "ytd-playlist-video-list-renderer #contents")
+
+  videoCallback(new PlaylistCover(playlistCover))
+  observeDirectChildrens(playlistVideos, video => videoCallback(new Video(video)))
 }

@@ -5,7 +5,8 @@ window.addEventListener("load", async () => {
   homePageObserver(pageManager, blurVideo("home"))
   watchPageObserver(pageManager, blurVideo("watch"))
   resultsPageObserver(pageManager, blurVideo("results"))
-  playlistObserver(pageManager, (video) => blur(video, channels, keywords))
+  playlistPageObserver(pageManager, (video) => blur(video, channels, keywords))
+  watchPlaylistObserver(pageManager, (video) => blur(video, channels, keywords))
 
   function blurVideo(metricName) {
     const recycler = new MutationObserver(mutations => {

@@ -28,6 +28,7 @@
         "content/observer/mutationObserver.js",
         "content/video.js",
         "content/playlistVideo.js",
+        "content/playlistCover.js",
         "content/blur.js",
         "content/index.js"
       ],
