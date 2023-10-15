@@ -2,12 +2,13 @@
 
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
-  const wrapper = await find(pageRoot, "#related #items")
 
-  observeDirectChildrens(wrapper, container => {
-    const video = container.querySelector(":has(#video-title)")
-    // last element is continuation and always results in null
-    if (video != null) {
+  // there is small (but breaking) difference between anonymous view and logged user
+  const wrapper = await find(pageRoot, "#related :is(#items:not(:has(#contents)):has(#video-title), #items #contents)")
+
+  observeDirectChildrens(wrapper, video => {
+    // last element is continuation hence check
+    if (video.matches(":has(#video-title)")) {
       videoCallback(video)
     }
   })
