@@ -13,7 +13,9 @@
     "open_in_tab": true
   },
   "background": {
-    "service_worker": "hook/onInstall.js"
+    "scripts": [
+      "hook/onInstall.js"
+    ]
   },
   "action": {},
   "content_scripts": [
@@ -41,5 +43,11 @@
   ],
   "permissions": [
     "storage"
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{9cf2d076-3f91-4d0f-a4e1-45e5f0fa92ac}",
+      "strict_min_version": "109.0"
+    }
+  }
 }
