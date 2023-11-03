@@ -16,6 +16,7 @@
   "background": {
     "service_worker": "hook/onInstall.js"
   },
+  "action": {},
   "content_scripts": [
     {
       "matches": [
@@ -37,7 +38,7 @@
         "content/style.css"
       ]
     },
-     {
+    {
       "matches": [
         "https://m.youtube.com/*"
       ],

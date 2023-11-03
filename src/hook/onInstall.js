@@ -13,4 +13,8 @@ chrome.runtime.onInstalled.addListener(async () => {
     chrome.storage.local.set({ channels, keywords })
     chrome.runtime.openOptionsPage()
   }
+
+  chrome.action.onClicked.addListener(() => {
+    chrome.runtime.openOptionsPage()
+  })
 })
