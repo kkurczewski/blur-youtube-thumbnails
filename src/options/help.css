@@ -1,0 +1,36 @@
+#help {
+  display: grid;
+  border-radius: 6px;
+  border: none;
+  box-shadow: var(--shadow);
+  background-color: rgb(255, 224, 64, 0.7);
+  height: 120px;
+  padding: 10px;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+#help h3 {
+  font-size: small;
+  font-weight: 400;
+  border-bottom: 1px rgb(110, 100, 40, 0.20) solid;
+  padding-bottom: 3px;
+  margin-block: 0;
+}
+
+#help h3 span {
+  display: inline-block;
+  margin-top: 2px;
+}
+
+#help ul {
+  padding-inline-start: 20px;
+  margin: 0;
+}
+
+#close {
+  font-size: 20px;
+  text-decoration: none;
+  float: right;
+  margin-top: -4px;
+}

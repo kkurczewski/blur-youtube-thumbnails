@@ -3,10 +3,14 @@ window.onload = async () => {
 
   document.querySelector("#save").onclick = saveTags
   document.querySelector("#matcher input").oninput = matchTags
+  document.querySelector("#help #close").onclick = hideHelp
 
   async function loadTags() {
     const options = await preloadOptions()
     console.log(options)
+    if (options.showHelp) {
+      document.querySelector("#help").style.display = ""
+    }
 
     for (let tagSection of document.querySelectorAll("fieldset:has(.tag)")) {
       for (let tagList of tagSection.querySelectorAll(":has(> .tag)")) {
@@ -55,5 +59,10 @@ window.onload = async () => {
           node.classList.toggle("highlight", matches)
         }
       })
+  }
+
+  async function hideHelp() {
+    await chrome.storage.local.remove("showHelp")
+    document.querySelector("#help").style.display = "none"
   }
 }
