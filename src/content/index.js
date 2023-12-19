@@ -1,44 +1,51 @@
+// generic selector
+const VIDEO_SELECTORS = {
+  channel: "ytd-channel-name #text",
+  title: "#video-title",
+}
+
 window.addEventListener("load", async () => {
   const { channels, keywords } = await chrome.storage.local.get()
   const pageManager = await find(document.body, "#page-manager")
 
-  homePageObserver(pageManager, blurVideo("home"))
-  watchPageObserver(pageManager, blurVideo("watch"))
-  resultsPageObserver(pageManager, blurVideo("results"))
-  playlistPageObserver(pageManager, (video) => blur(video, channels, keywords))
-  watchPlaylistObserver(pageManager, (video) => blur(video, channels, keywords))
+  homePageObserver(pageManager, recyclingBlur(VIDEO_SELECTORS))
+  watchPageObserver(pageManager, _blur(VIDEO_SELECTORS))
+  resultsPageObserver(pageManager, _blur(VIDEO_SELECTORS))
+  playlistPageObserver(pageManager, _blur(PLAYLIST_SELECTORS))
+  watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
 
-  function blurVideo(metricName) {
+  function _blur(selectors) {
+    return async video => blur(await buildVideoNode(video, selectors), channels, keywords)
+  }
+
+  function recyclingBlur(selectors) {
+    const RECYCLABLE_CLASS = "recyclable"
+
     const recycler = new MutationObserver(mutations => {
       mutations.forEach(({ addedNodes }) => {
-        addedNodes.forEach(node => {
-          let containerNode = node.parentNode
-          while (!containerNode.matches("#dismissible")) {
-            containerNode = containerNode.parentNode
+        addedNodes.forEach(async node => {
+          if (node?.closest == null) {
+            node = node.parentElement
           }
-          _blurVideo(containerNode)
-          console.count(`recycled video ${metricName}`)
+          node = node.closest(`.${RECYCLABLE_CLASS}`)
+          console.log("recycler", node)
+          await blur(node, channels, keywords)
         })
       })
     })
 
-    return videoElement => {
-      const video = _blurVideo(videoElement)
-      video.registerRecycler(recycler)
-    }
-
-    function _blurVideo(videoElement) {
-      const video = new Video(videoElement)
-      _blur(video, channels, keywords)
-      console.count(`processed video ${metricName}`)
-
-      return video
-
-      function _blur(video, channels, keywords) {
-        if (blur(video, channels, keywords)) {
-          console.count(`blurred video ${metricName}`)
-        }
+    return async video => {
+      await _blur(selectors)(video)
+      video.classList.add(RECYCLABLE_CLASS)
+      const config = {
+        childList: true,
+        characterData: false,
+        subtree: false,
       }
+      const title = await video.queryTitle()
+      const channel = await video.queryChannel()
+      recycler.observe(title, config)
+      recycler.observe(channel, config)
     }
   }
 })

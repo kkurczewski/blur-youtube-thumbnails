@@ -1,3 +1,9 @@
+// generic selector
+const MOBILE_VIDEO_SELECTORS = {
+  title: "h3 > .yt-core-attributed-string",
+  channel: ".media-item-metadata :not(h3) > .yt-core-attributed-string",
+}
+
 window.addEventListener("load", async () => {
   const { channels, keywords } = await chrome.storage.local.get()
   const app = await find(document.body, "#app")
@@ -7,12 +13,12 @@ window.addEventListener("load", async () => {
   // hence new observer needs to be created every time
   observeDirectChildrens(app, container => {
     if (container.matches(".page-container")) {
-      homePageObserver(container, _blur)
-      watchPageObserver(container, _blur)
+      homePageObserver(container, _blur(MOBILE_VIDEO_SELECTORS))
+      watchPageObserver(container, _blur(MOBILE_VIDEO_SELECTORS))
     }
   })
 
-  function _blur(video) {
-    blur(video, channels, keywords)
+  function _blur(selectors) {
+    return async video => blur(await buildVideoNode(video, selectors), channels, keywords)
   }
 })

@@ -1,22 +1,33 @@
-function blur(video, channels, keywords) {
-  const channelWhitelist = channels.whitelist
-  const channelBlacklist = channels.blacklist
-  const titleWhitelist = keywords.whitelist
-  const titleBlacklist = keywords.blacklist
+async function blur(video, channels, keywords) {
+  const title = (await video.queryTitle()).textContent
+  const channel = (await video.queryChannel()).textContent
 
-  return video.blur(isBlacklisted(video) && !isWhitelisted(video))
+  console.debug(title, channel)
 
-  function isBlacklisted(video) {
-    const blackListedChannel = channelBlacklist.some(it => video?.channel?.match(RegExp(it, "i")) != null) ?? false
-    const blackListedTitle = titleBlacklist.some(it => video.title.match(RegExp(it, "i")) != null)
+  return video.toggleBlur(isBlacklisted() && !isWhitelisted())
 
-    return blackListedChannel || blackListedTitle
+  function isBlacklisted() {
+    const titleBlacklist = keywords.blacklist
+    const channelBlacklist = channels.blacklist
+
+    return matchesKeywords(titleBlacklist, channelBlacklist)
   }
 
-  function isWhitelisted(video) {
-    const whitelistedChannel = channelWhitelist.some(it => video?.channel?.match(RegExp(it, "i")) != null) ?? false
-    const whitelistedTitle = titleWhitelist.some(it => video.title.match(RegExp(it, "i")) != null)
+  function isWhitelisted() {
+    const titleWhitelist = keywords.whitelist
+    const channelWhitelist = channels.whitelist
 
-    return whitelistedChannel || whitelistedTitle
+    return matchesKeywords(titleWhitelist, channelWhitelist)
+  }
+
+  function matchesKeywords(titleKeywords, channelKeywords) {
+    const titleMatches = matches(titleKeywords, title)
+    const channelMatches = matches(channelKeywords, channel) ?? false
+
+    return titleMatches || channelMatches
+
+    function matches(keywords, key) {
+      return (key != null) ? keywords.some(it => key.match(RegExp(it, "i")) != null) : null
+    }
   }
 }

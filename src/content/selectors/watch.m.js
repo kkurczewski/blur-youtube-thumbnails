@@ -8,7 +8,7 @@ async function watchPageObserver(root, videoCallback) {
   observeDirectChildrens(related, async video => {
     // filter continuation and navigation bar
     if (video.matches(".item")) {
-      videoCallback(await buildVideoNode(video, MOBILE_VIDEO_SELECTORS))
+      videoCallback(video)
     }
   })
 }

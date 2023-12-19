@@ -6,10 +6,13 @@ async function resultsPageObserver(root, videoCallback) {
 
   const wrapperObserver = new DirectChildObserver(element => {
     if (element.matches(":has(#items #video-title")) {
+      // video container
       wrapperObserver.observe(element.querySelector("#items"))
-    } else if (element.matches(":has(#video-title)")) { // channel renderer has no title
+    } else if (element.matches(":has(#video-title)")) {
+      // single video
       videoCallback(element)
     }
+    // channel renderer has no title, ignore
   })
 
   observeDirectChildrens(scroll, async page => {

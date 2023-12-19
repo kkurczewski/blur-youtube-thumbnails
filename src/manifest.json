@@ -23,15 +23,13 @@
         "https://www.youtube.com/*"
       ],
       "js": [
+        "content/blur.js",
+        "content/observer/mutationObserver.js",
         "content/selectors/home.js",
         "content/selectors/watch.js",
         "content/selectors/results.js",
         "content/selectors/playlists.js",
-        "content/observer/mutationObserver.js",
         "content/video.js",
-        "content/playlistVideo.js",
-        "content/playlistCover.js",
-        "content/blur.js",
         "content/index.js"
       ],
       "css": [
@@ -47,7 +45,7 @@
         "content/observer/mutationObserver.js",
         "content/selectors/home.m.js",
         "content/selectors/watch.m.js",
-        "content/videoNode.js",
+        "content/video.js",
         "content/index.m.js"
       ],
       "css": [
