@@ -11,5 +11,5 @@ async function playlistPageObserver(root, videoCallback) {
   observeDirectChildrens(playlistVideos, videoCallback)
 
   const playlistCover = await find(pageRoot, "ytd-playlist-header-renderer")
-  await videoCallback(playlistCover)
+  videoCallback(playlistCover)
 }

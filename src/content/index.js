@@ -29,7 +29,7 @@ window.addEventListener("load", async () => {
           }
           node = node.closest(`.${RECYCLABLE_CLASS}`)
           console.log("recycler", node)
-          await blur(node, channels, keywords)
+          blur(node, channels, keywords)
         })
       })
     })
