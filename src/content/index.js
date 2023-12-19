@@ -13,6 +13,7 @@ window.addEventListener("load", async () => {
   resultsPageObserver(pageManager, _blur(VIDEO_SELECTORS))
   playlistPageObserver(pageManager, _blur(PLAYLIST_SELECTORS))
   watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
+  watchEndscreen(pageManager, _blur(WATCH_ENDSCREEN_SELECTORS))
 
   function _blur(selectors) {
     return async video => blur(await buildVideoNode(video, selectors), channels, keywords)
