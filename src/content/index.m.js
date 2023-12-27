@@ -19,6 +19,7 @@ window.addEventListener("load", async () => {
       container.classList.toggle("blur-installed", true)
 
       homePageObserver(container, _blur(MOBILE_VIDEO_SELECTORS))
+      homePageShortsObserver(container, _blur({ ...MOBILE_VIDEO_SELECTORS, channel: null }))
       watchPageObserver(container, _blur(MOBILE_VIDEO_SELECTORS))
     }
   })
