@@ -11,8 +11,13 @@ window.addEventListener("load", async () => {
   // mobile page has strange reload behavior
   // every time transition occurs nodes are removed from DOM tree
   // hence new observer needs to be created every time
-  observeDirectChildrens(app, container => {
-    if (container.matches(".page-container")) {
+  observeDirectChildrens(app, _ => {
+    const container = app.querySelector(".page-container:not(.blur-installed)")
+    if (container != null) {
+      // transition from watch page to home page misses page container node
+      // therefore observe all nodes and lock using marker class
+      container.classList.toggle("blur-installed", true)
+
       homePageObserver(container, _blur(MOBILE_VIDEO_SELECTORS))
       watchPageObserver(container, _blur(MOBILE_VIDEO_SELECTORS))
     }
