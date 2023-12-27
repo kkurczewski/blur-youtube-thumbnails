@@ -2,9 +2,14 @@ async function blur(video, channels, keywords) {
   const title = (await video.queryTitle()).textContent
   const channel = (await video.queryChannel()).textContent
 
-  console.debug(title, channel)
+  console.table({
+    title,
+    channel,
+    blurred: isBlacklisted() && !isWhitelisted(),
+  })
+  console.debug(title, channel, video)
 
-  return video.toggleBlur(isBlacklisted() && !isWhitelisted())
+  return video.classList.toggle("blur", isBlacklisted() && !isWhitelisted())
 
   function isBlacklisted() {
     const titleBlacklist = keywords.blacklist

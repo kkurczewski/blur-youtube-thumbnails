@@ -15,10 +15,12 @@ async function watchPageObserver(root, videoCallback) {
   // there is small (but breaking) difference between anonymous view and logged user
   const wrapper = await find(pageRoot, "#related :is(#items:not(:has(#contents)):has(#video-title), #items #contents)")
 
+  const recyclingCallback = recyclerCallback(videoCallback)
+
   observeDirectChildrens(wrapper, video => {
     // last element is continuation hence additional check
     if (video.matches(":has(#video-title)")) {
-      videoCallback(video)
+      recyclingCallback(video)
     }
   })
 }

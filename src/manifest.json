@@ -30,6 +30,7 @@
         "content/selectors/results.js",
         "content/selectors/playlists.js",
         "content/video.js",
+        "content/recycler.js",
         "content/index.js"
       ],
       "css": [
