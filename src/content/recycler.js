@@ -17,15 +17,21 @@ function recyclerCallback(callback) {
   async function _callback(video) {
     callback(video)
     video.classList.add(RECYCLABLE_CLASS)
+
     const config = {
       childList: true,
       characterData: false,
       subtree: false,
     }
-    const title = await video.queryTitle()
-    const channel = await video.queryChannel()
+    const title = video.queryTitle()
+    if (title == null) {
+      return
+    }
     recycler.observe(title, config)
-    recycler.observe(channel, config)
+    const channel = video.queryChannel()
+    if (channel != null) {
+      recycler.observe(channel, config)
+    }
   }
 
   return _callback
