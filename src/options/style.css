@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  margin-top: 100px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 }
@@ -14,6 +14,11 @@ body {
   display: grid;
   row-gap: 10px;
   width: 500px;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
 }
 
 #version {
@@ -115,7 +120,7 @@ h3 {
 }
 
 #save:hover {
-  background: #317FE8 radial-gradient(circle, transparent 1%, #317FE8 1%) center/15000%;
+  background: #005cc8 radial-gradient(circle, transparent 1%, #005cc8 1%) center/15000%;
 }
 
 #save:active {
@@ -131,6 +136,21 @@ h3 {
   cursor: pointer;
   color: whitesmoke;
   font-weight: bold;
-  background-color: #1A73E8;
+  background-color: #0075ff;
   box-shadow: var(--shadow);
+}
+
+*:has(> #unblur) {
+  display: flex;
+  align-items: center;
+  color: #878e95;
+}
+
+*:has(> #unblur) * {
+  cursor: pointer;
+}
+
+label[for=unblur] {
+  margin-left: 3px;
+  font-size: x-small;
 }

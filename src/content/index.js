@@ -7,7 +7,8 @@ const VIDEO_SELECTORS = {
 window.addEventListener("load", async () => {
   console.debug("Blur loaded")
 
-  const { channels, keywords } = await chrome.storage.local.get()
+  const { channels, keywords, unblur } = await chrome.storage.local.get()
+  document.body.classList.toggle("unblur", unblur ?? false)
   const pageManager = await find(document.body, "#page-manager")
 
   homePageObserver(pageManager, _blur(VIDEO_SELECTORS))

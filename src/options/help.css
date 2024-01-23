@@ -7,20 +7,18 @@
   height: 120px;
   padding: 10px;
   margin-top: 10px;
+  padding-top: 5px;
   gap: 10px;
 }
 
 #help h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: small;
   font-weight: 400;
   border-bottom: 1px rgb(110, 100, 40, 0.20) solid;
-  padding-bottom: 3px;
   margin-block: 0;
-}
-
-#help h3 span {
-  display: inline-block;
-  margin-top: 2px;
 }
 
 #help ul {
@@ -31,6 +29,4 @@
 #close {
   font-size: 20px;
   text-decoration: none;
-  float: right;
-  margin-top: -4px;
 }

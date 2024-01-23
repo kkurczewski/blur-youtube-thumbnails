@@ -1,37 +1,43 @@
 window.onload = async () => {
-  loadTags()
+  await loadOptions()
 
   document.querySelector("#save").onclick = saveTags
   document.querySelector("#matcher input").oninput = matchTags
   document.querySelector("#help #close").onclick = hideHelp
+  document.getElementById("unblur").onchange = saveUnblurSetting
 
-  async function loadTags() {
+  async function loadOptions() {
     const options = await preloadOptions()
     console.log(options)
+
     if (options.showHelp) {
       document.querySelector("#help").style.display = ""
     }
+    loadTags()
+    document.getElementById("unblur").checked = options["unblur"]
 
-    for (let tagSection of document.querySelectorAll("fieldset:has(.tag)")) {
-      for (let tagList of tagSection.querySelectorAll(":has(> .tag)")) {
-        assignEntries(tagList, options[tagSection.id][tagList.className])
+    function loadTags() {
+      for (let tagSection of document.querySelectorAll("fieldset:has(.tag)")) {
+        for (let tagList of tagSection.querySelectorAll(":has(> .tag)")) {
+          assignEntries(tagList, options[tagSection.id][tagList.className])
+        }
       }
-    }
 
-    function assignEntries(list, entries) {
-      const firstElement = list.firstElementChild
-      entries.forEach(entry => {
-        const li = firstElement.cloneNode()
-        li.textContent = entry
-        list.append(li)
-      })
-      if (entries.length > 0) {
-        firstElement.remove()
+      function assignEntries(list, entries) {
+        const firstElement = list.firstElementChild
+        entries.forEach(entry => {
+          const li = firstElement.cloneNode()
+          li.textContent = entry
+          list.append(li)
+        })
+        if (entries.length > 0) {
+          firstElement.remove()
+        }
       }
     }
   }
 
-  async function saveTags() {
+  function saveTags() {
     const options = {}
     for (let tagSection of document.querySelectorAll("fieldset:has(.tag)")) {
       options[tagSection.id] = {}
@@ -39,7 +45,7 @@ window.onload = async () => {
         options[tagSection.id][tagList.className] = extractValues(tagList)
       }
     }
-    saveAllOptions(options)
+    saveOptions(options)
 
     function extractValues(list) {
       return Array.from(list.children)
@@ -48,7 +54,7 @@ window.onload = async () => {
     }
   }
 
-  async function matchTags(event) {
+  function matchTags(event) {
     const input = event.srcElement.value
     document
       .querySelectorAll(".tag")
@@ -64,5 +70,9 @@ window.onload = async () => {
   async function hideHelp() {
     await chrome.storage.local.remove("showHelp")
     document.querySelector("#help").style.display = "none"
+  }
+
+  function saveUnblurSetting() {
+    saveOptions({ unblur: document.getElementById("unblur").checked })
   }
 }
