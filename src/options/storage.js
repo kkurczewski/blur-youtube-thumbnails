@@ -1,4 +1,4 @@
-async function preloadOptions() {
+async function loadOptions() {
   return chrome.storage.local.get()
 }
 

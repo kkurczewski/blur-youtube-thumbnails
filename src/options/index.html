@@ -4,72 +4,100 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <link rel="stylesheet" type="text/css" href="help.css" />
 </head>
 
 <body>
-  <div id="root">
-    <div id="header">
-      <span id="version">Blur <span>YouTube</span> thumbnails
-      </span>
-      <div>
-        <input type="checkbox" id="unblur"/>
-        <label for="unblur">Unblur on long hover</label>
-      </div>
-    </div>
-
-    <div id="help" style="display: none">
-      <h3><span>First time?</span><a href="#" id="close">&times;</a></h3>
+  <div id="banner">Blurred thumbnails for YouTube</div>
+  <form>
+    <div id="settings" class="elevation">
+      <h2>Settings</h2>
       <ul>
-        <li>Click on tags to edit existing keywords</li>
-        <li>Press enter to add new keywords</li>
-        <li>For channels use plain names (including spaces)</li>
-        <li>Use: ".*" as a keyword to match all patterns</li>
-        <li>Use "Test phrase" input on bottom to check which tags will apply for given plain text</li>
-        <li>Go to <a target="_blank"
-            href="https://chrome.google.com/webstore/detail/blurred-thumbnails/lefhalefpinohjmpfflkfcaoiafmpifb">
-            extension page</a> for further help</li>
+        <li>
+          <input id="unblur" type="checkbox" />
+          <label for="unblur">Unblur on long hover</label>
+        </li>
+        <li>
+          <input id="disableSearch" type="checkbox" />
+          <label for="disableSearch">Disable blur on search page</label>
+        </li>
+      </ul>
+      <h2>Help</h2>
+      <p>
+        Add channels (including spaces) and/or keywords that you wish to be blurred.
+      </p>
+      <p>
+        If you want to match all patterns you can use special symbol: <code title="dot star">.*</code>.
+      </p>
+      <p>
+        Use "Test&nbsp;phrase" input box to check which tags apply to given plain text.
+      </p>
+      <h2>Links</h2>
+      <ul>
+        <li>
+          <a href="https://www.youtube.com/account_playback">Manage video preview</a>
+        </li>
+        <li>
+          <a
+            href="https://chromewebstore.google.com/u/1/detail/blurred-thumbnails/lefhalefpinohjmpfflkfcaoiafmpifb?hl=en">
+            Report a bug
+          </a>
+        </li>
       </ul>
     </div>
 
-    <h2>Channels</h2>
-    <fieldset id="channels">
-      <h3>Whitelist</h3>
-      <ul class="whitelist" spellcheck="false">
-        <li class="tag" contenteditable="plaintext-only"></li>
-      </ul>
+    <div id="tags">
+      <div id="channels">
+        <h2>Channels</h2>
+        <div class="card">
+          <section>
+            <h3>Whitelist</h3>
+            <ul class="whitelist" spellcheck="false">
+              <li contenteditable="plaintext-only"></li>
+            </ul>
+          </section>
+          <section>
+            <h3>Blacklist</h3>
+            <ul class="blacklist" spellcheck="false">
+              <li contenteditable="plaintext-only"></li>
+            </ul>
+          </section>
+        </div>
+      </div>
 
-      <h3>Blacklist</h3>
-      <ul class="blacklist" spellcheck="false">
-        <li class="tag" contenteditable="plaintext-only"></li>
-      </ul>
-    </fieldset>
+      <div id="keywords">
+        <h2>Keywords</h2>
+        <div class="card">
+          <section>
+            <h3>Whitelist</h3>
+            <ul class="whitelist" spellcheck="false">
+              <li contenteditable="plaintext-only"></li>
+            </ul>
+          </section>
+          <section>
+            <h3>Blacklist</h3>
+            <ul class="blacklist" spellcheck="false">
+              <li contenteditable="plaintext-only"></li>
+            </ul>
+          </section>
+        </div>
+      </div>
 
-    <h2>Keywords</h2>
-    <fieldset id="keywords">
-      <h3>Whitelist</h3>
-      <ul class="whitelist" spellcheck="false">
-        <li class="tag" contenteditable="plaintext-only"></li>
-      </ul>
+      <div id="matcher">
+        <h2>Test phrase</h2>
+        <div class="card">
+          <h3>Input</h3>
+          <input type="text" placeholder="Type something to check which tags apply" />
+        </div>
+      </div>
 
-      <h3>Blacklist</h3>
-      <ul class="blacklist" spellcheck="false">
-        <li class="tag" contenteditable="plaintext-only"></li>
-      </ul>
-    </fieldset>
+      <input id="save" type="button" value="Save" />
+    </div>
 
-    <h2>Test phrase</h2>
-    <fieldset id="matcher">
-      <h3>Input</h3>
-      <input type="text" placeholder="Type something to check which tags apply"></input>
-    </fieldset>
+  </form>
 
-    <button id="save">Save</button>
-
-    <script type="text/javascript" src="storage.js"></script>
-    <script type="text/javascript" src="editableList.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-  </div>
+  <script type="text/javascript" src="storage.js"></script>
+  <script type="text/javascript" src="editableList.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 </body>
 
 </html>

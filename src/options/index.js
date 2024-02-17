@@ -1,24 +1,21 @@
 window.onload = async () => {
-  await loadOptions()
+  const TAG_TYPES = ".whitelist,.blacklist"
+  const TAG_SECTIONS = `#tags > :has(${TAG_TYPES})`
 
+  const options = await loadOptions()
+  console.log(options)
+
+  populateForm()
   document.querySelector("#save").onclick = saveTags
   document.querySelector("#matcher input").oninput = matchTags
-  document.querySelector("#help #close").onclick = hideHelp
-  document.getElementById("unblur").onchange = saveUnblurSetting
 
-  async function loadOptions() {
-    const options = await preloadOptions()
-    console.log(options)
-
-    if (options.showHelp) {
-      document.querySelector("#help").style.display = ""
-    }
+  function populateForm() {
     loadTags()
-    document.getElementById("unblur").checked = options["unblur"]
+    loadSettings()
 
     function loadTags() {
-      for (let tagSection of document.querySelectorAll("fieldset:has(.tag)")) {
-        for (let tagList of tagSection.querySelectorAll(":has(> .tag)")) {
+      for (let tagSection of document.querySelectorAll(TAG_SECTIONS)) {
+        for (let tagList of tagSection.querySelectorAll(TAG_TYPES)) {
           assignEntries(tagList, options[tagSection.id][tagList.className])
         }
       }
@@ -30,18 +27,26 @@ window.onload = async () => {
           li.textContent = entry
           list.append(li)
         })
-        if (entries.length > 0) {
-          firstElement.remove()
-        }
+        list.append(firstElement)
       }
+    }
+
+    function loadSettings() {
+      document.querySelectorAll("#settings input[type=checkbox]").forEach(checkbox => {
+        checkbox.checked = options[checkbox.id]
+        checkbox.onchange = e => {
+          const target = e.target
+          saveOptions({ [target.id]: target.checked })
+        }
+      })
     }
   }
 
   function saveTags() {
     const options = {}
-    for (let tagSection of document.querySelectorAll("fieldset:has(.tag)")) {
+    for (let tagSection of document.querySelectorAll(TAG_SECTIONS)) {
       options[tagSection.id] = {}
-      for (let tagList of tagSection.querySelectorAll(":has(> .tag)")) {
+      for (let tagList of tagSection.querySelectorAll(TAG_TYPES)) {
         options[tagSection.id][tagList.className] = extractValues(tagList)
       }
     }
@@ -55,24 +60,16 @@ window.onload = async () => {
   }
 
   function matchTags(event) {
-    const input = event.srcElement.value
-    document
-      .querySelectorAll(".tag")
-      .forEach(node => {
-        const tagValue = node.innerText
-        if (tagValue.length > 0) {
-          const matches = input.match(RegExp(tagValue, "i")) != null
-          node.classList.toggle("highlight", matches)
-        }
-      })
-  }
-
-  async function hideHelp() {
-    await chrome.storage.local.remove("showHelp")
-    document.querySelector("#help").style.display = "none"
-  }
-
-  function saveUnblurSetting() {
-    saveOptions({ unblur: document.getElementById("unblur").checked })
+    const input = event.target.value
+    if (!input) {
+      return
+    }
+    document.querySelectorAll(`ul:is(${TAG_TYPES}) li`).forEach(node => {
+      const tagValue = node.innerText
+      if (tagValue.length > 0) {
+        const matches = input.match(RegExp(tagValue, "i")) != null
+        node.classList.toggle("highlight", matches)
+      }
+    })
   }
 }

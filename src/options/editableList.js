@@ -1,5 +1,6 @@
 document.querySelectorAll("ul:has(li[contenteditable])").forEach(ul => {
   ul.addEventListener("keydown", onKeyDown)
+  ul.addEventListener("keyup", onKeyUp)
   ul.addEventListener("blur", onBlur, true)
 
   function onKeyDown(e) {
@@ -7,28 +8,37 @@ document.querySelectorAll("ul:has(li[contenteditable])").forEach(ul => {
     if (!target.matches("li[contenteditable]")) {
       return
     }
-    target.textContent = target.textContent.replace(/\n/g, '') // fixes unnecessary newline that is appended
+    if (target.textContent.length >= 30) {
+      e.preventDefault()
+      return
+    }
     switch (e.key) {
       case "Enter":
-        if (!target.innerText) {
+        e.preventDefault() // prevents adding empty new lines
+        break
+    }
+  }
+
+  function onKeyUp(e) {
+    const target = e.target
+    if (!target.matches("li[contenteditable]")) {
+      return
+    }
+    switch (e.key) {
+      case "Enter":
+        if (!target.textContent) {
           // ignore empty input
           return
         }
-        if (target.nextElementSibling?.innerText === '') {
-          // select next empty element instead creating new one
-          target.nextElementSibling.focus()
+        const next = target.nextElementSibling
+        if (next && !next.textContent) {
+          // reuse empty node
+          next.focus()
           return
         }
-        const li = target.cloneNode()
-        li.textContent = target.textContent
-        target.textContent = ""
-        target.parentNode.insertBefore(li, target)
-        break
-      case "Backspace":
-      case "Delete":
-        if (!target.innerText) {
-          target.previousElementSibling?.remove()
-        }
+        // exit via enter
+        const li = appendEmptyNode(target)
+        li.focus()
         break
     }
   }
@@ -38,8 +48,20 @@ document.querySelectorAll("ul:has(li[contenteditable])").forEach(ul => {
     if (!target.matches("li[contenteditable]")) {
       return
     }
-    if (!target.innerText && target.parentNode.childElementCount > 1) {
-      target.remove()
+    if (!target.textContent) {
+      if (target.nextElementSibling) {
+        // remove empty node in middle
+        target.remove()
+      }
+    } else if (!target.nextElementSibling) {
+      // exit via click
+      appendEmptyNode(target)
     }
+  }
+
+  function appendEmptyNode(target) {
+    const li = target.cloneNode()
+    target.parentNode.insertBefore(li, target.nextElementSibling)
+    return li
   }
 })
