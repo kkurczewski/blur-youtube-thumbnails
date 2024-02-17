@@ -12,7 +12,10 @@
     "https://www.youtube.com/*",
     "https://m.youtube.com/*"
   ],
-  "options_page": "options/index.html",
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
   "background": {
     "service_worker": "hook/onInstall.js"
   },
