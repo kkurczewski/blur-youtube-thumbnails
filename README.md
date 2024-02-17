@@ -3,8 +3,8 @@ Extension that allows to selectively blur thumbnails on Youtube videos.
 
 ### Install
 
-[Chrome Web store](https://chrome.google.com/webstore/detail/blurred-thumbnails/lefhalefpinohjmpfflkfcaoiafmpifb?hl=pl&authuser=1)
-[Firefox Store](https://addons.mozilla.org/pl/firefox/addon/blurred-thumbnails/)
+* [Chrome Web store](https://chrome.google.com/webstore/detail/blurred-thumbnails/lefhalefpinohjmpfflkfcaoiafmpifb?hl=pl&authuser=1)
+* [Firefox Store](https://addons.mozilla.org/pl/firefox/addon/blurred-thumbnails)
 
 ### Configuration options
 
