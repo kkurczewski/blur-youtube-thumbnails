@@ -7,16 +7,19 @@ const VIDEO_SELECTORS = {
 window.addEventListener("load", async () => {
   console.debug("Blur loaded")
 
-  const { channels, keywords, unblur } = await chrome.storage.local.get()
+  const { channels, keywords, unblur, disableSearch } = await chrome.storage.local.get()
   document.body.classList.toggle("unblur", unblur ?? false)
   const pageManager = await find(document.body, "#page-manager")
 
   homePageObserver(pageManager, _blur(VIDEO_SELECTORS))
   watchPageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  resultsPageObserver(pageManager, _blur(VIDEO_SELECTORS))
   playlistPageObserver(pageManager, _blur(PLAYLIST_SELECTORS))
   watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
   watchEndscreen(pageManager, _blur(WATCH_ENDSCREEN_SELECTORS))
+
+  if (!disableSearch) {
+    resultsPageObserver(pageManager, _blur(VIDEO_SELECTORS))
+  }
 
   function _blur(selectors) {
     return async video => blur(await buildVideoNode(video, selectors), channels, keywords)
