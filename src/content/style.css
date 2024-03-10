@@ -1,19 +1,52 @@
-.blur :is(.thumbnail-wrapper, #thumbnail) img, .ytp-endscreen-content .blur div {
+.blur :is(#thumbnail, .thumbnail-wrapper) img,
+.ytp-endscreen-content .blur div,
+:has(.blur:hover) #video-preview video {
   --blur: 15px;
 
   filter: blur(var(--blur));
   -webkit-filter: blur(var(--blur));
 
-  background-color: transparent;
-  transition-property: filter;
+  transition-property: filter, -webkit-filter;
   transition-timing-function: ease-out;
   transition-duration: 100ms;
 }
 
-.unblur :is(.blur :is(.thumbnail-wrapper, #thumbnail) img:hover, .ytp-endscreen-content .blur:hover div) {
-  filter: unset;
-  -webkit-filter: unset;
-  transition-delay: 1s;
-  transition-timing-function: ease-in;
-  transition-duration: 3s;
+body:not(.unblur) #video-preview * {
+  /* 
+    #video-preview overlaps .blur element and changes effective target for :hover event,
+    therefore any change of mouse position will invalidate selector responsible for blurring.
+    
+    When .unblur is on then fallback style will be matched and smooth transition will apply.
+    This style allows :hover to keep its target and keep blur in whole thumbnail region.
+  */
+  pointer-events: none;
+}
+
+.unblur {
+  .blur :is(#thumbnail, .thumbnail-wrapper) img:hover,
+  .ytp-endscreen-content .blur:hover div,
+  #video-preview [playing] video {
+    filter: unset;
+    -webkit-filter: unset;
+
+    transition-property: filter, -webkit-filter;
+    transition-delay: 1s;
+    transition-timing-function: ease-in;
+    transition-duration: 3s;
+  }
+
+  #video-preview :not(#player-controls) {
+    /* product promotion label blocks mouse events */
+    pointer-events: none;
+  }
+}
+
+#video-preview {
+  #player-container {
+    overflow: hidden;
+  }
+
+  #thumbnail-container {
+    display: none;
+  }
 }
