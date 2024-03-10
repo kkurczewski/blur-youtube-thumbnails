@@ -1,4 +1,5 @@
 .blur :is(#thumbnail, .thumbnail-wrapper) img,
+.blur #thumbnail #mouseover-overlay img,
 .ytp-endscreen-content .blur div,
 :has(.blur:hover) #video-preview video {
   --blur: 15px;
@@ -11,19 +12,9 @@
   transition-duration: 100ms;
 }
 
-body:not(.unblur) #video-preview * {
-  /* 
-    #video-preview overlaps .blur element and changes effective target for :hover event,
-    therefore any change of mouse position will invalidate selector responsible for blurring.
-    
-    When .unblur is on then fallback style will be matched and smooth transition will apply.
-    This style allows :hover to keep its target and keep blur in whole thumbnail region.
-  */
-  pointer-events: none;
-}
-
 .unblur {
   .blur :is(#thumbnail, .thumbnail-wrapper) img:hover,
+  .blur #thumbnail #mouseover-overlay :hover img,
   .ytp-endscreen-content .blur:hover div,
   #video-preview [playing] video {
     filter: unset;
@@ -39,6 +30,27 @@ body:not(.unblur) #video-preview * {
     /* product promotion label blocks mouse events */
     pointer-events: none;
   }
+}
+
+/* video-preview-specific styles */
+
+.blur #thumbnail:has(#mouseover-overlay img) #overlays {
+  /* 
+    video preview for watch-next list is semi-transparent on borders
+    and video duration label is visible through it
+  */
+  display: none;
+}
+
+body:not(.unblur) #video-preview * {
+  /* 
+    #video-preview overlaps .blur element and changes effective target for :hover event,
+    therefore any change of mouse position will invalidate selector responsible for blurring.
+    
+    When .unblur is on then fallback style will be matched and smooth transition will apply.
+    This style allows :hover to keep its target and keep blur in whole thumbnail region.
+  */
+  pointer-events: none;
 }
 
 #video-preview {
