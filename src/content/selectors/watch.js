@@ -1,4 +1,3 @@
-// watch page, right panel
 const WATCH_PLAYLIST_SELECTORS = {
   channel: "#byline",
   title: "#video-title",

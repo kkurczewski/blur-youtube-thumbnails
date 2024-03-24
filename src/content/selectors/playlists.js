@@ -1,4 +1,3 @@
-// playlist page from results
 const PLAYLIST_SELECTORS = {
   channel: "ytd-channel-name #text,ytd-playlist-header-renderer #owner-text",
   title: "#video-title, ytd-playlist-header-renderer #text",

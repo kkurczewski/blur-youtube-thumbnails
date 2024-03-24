@@ -1,5 +1,6 @@
 function recyclerCallback(callback) {
-  const RECYCLABLE_SELECTOR = ".recyclable"
+  const RECYCLABLE_CLASS = "recyclable"
+  const RECYCLABLE_SELECTOR = `.${RECYCLABLE_CLASS}`
 
   const recycler = new MutationObserver(mutations => {
     mutations.forEach(({ addedNodes }) => {
@@ -16,7 +17,7 @@ function recyclerCallback(callback) {
 
   async function _callback(video) {
     callback(video)
-    video.classList.add(RECYCLABLE_SELECTOR)
+    video.classList.add(RECYCLABLE_CLASS)
 
     const config = {
       childList: true,

@@ -13,6 +13,7 @@
 }
 
 .unblur {
+
   .blur :is(#thumbnail, .thumbnail-wrapper) img:hover,
   .blur #thumbnail #mouseover-overlay :hover img,
   .ytp-endscreen-content .blur:hover div,
@@ -25,14 +26,14 @@
     transition-timing-function: ease-in;
     transition-duration: 3s;
   }
-
-  #video-preview :not(#player-controls) {
-    /* product promotion label blocks mouse events */
-    pointer-events: none;
-  }
 }
 
 /* video-preview-specific styles */
+
+.unblur #video-preview :not(#player-controls) {
+  /* product promotion label blocks mouse events */
+  pointer-events: none;
+}
 
 .blur #thumbnail:has(#mouseover-overlay img) #overlays {
   /* 
