@@ -30,7 +30,7 @@
         "content/observer/mutationObserver.js",
         "content/selectors/home.js",
         "content/selectors/watch.js",
-        "content/selectors/results.js",
+        "content/selectors/search.js",
         "content/selectors/playlists.js",
         "content/video.js",
         "content/recycler.js",
