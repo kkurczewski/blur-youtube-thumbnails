@@ -1,8 +1,8 @@
-// search results
-
 async function resultsPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-search")
   const scroll = await find(pageRoot, "#primary #contents")
+
+  const callback = recyclerCallback(videoCallback)
 
   const wrapperObserver = new DirectChildObserver(element => {
     if (element.matches(":has(#items #video-title")) {
@@ -10,7 +10,7 @@ async function resultsPageObserver(root, videoCallback) {
       wrapperObserver.observe(element.querySelector("#items"))
     } else if (element.matches(":has(#video-title)")) {
       // single video
-      videoCallback(element)
+      callback(element)
     }
     // channel renderer has no title, ignore
   })

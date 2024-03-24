@@ -1,5 +1,5 @@
 function recyclerCallback(callback) {
-  const RECYCLABLE_CLASS = "recyclable"
+  const RECYCLABLE_SELECTOR = ".recyclable"
 
   const recycler = new MutationObserver(mutations => {
     mutations.forEach(({ addedNodes }) => {
@@ -7,7 +7,7 @@ function recyclerCallback(callback) {
         if (node?.closest == null) {
           node = node.parentElement
         }
-        node = node.closest(`.${RECYCLABLE_CLASS}`)
+        node = node.closest(RECYCLABLE_SELECTOR)
         console.log("Recycling video:", node)
         callback(node)
       })
@@ -16,17 +16,16 @@ function recyclerCallback(callback) {
 
   async function _callback(video) {
     callback(video)
-    video.classList.add(RECYCLABLE_CLASS)
+    video.classList.add(RECYCLABLE_SELECTOR)
 
     const config = {
       childList: true,
-      characterData: false,
-      subtree: false,
+      characterData: true,
+      subtree: true,
     }
     const title = video.queryTitle()
-    if (title == null) {
-      return
-    }
+    console.assert(title != null, "title node was null")
+
     recycler.observe(title, config)
     const channel = video.queryChannel()
     if (channel != null) {
