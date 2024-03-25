@@ -11,11 +11,11 @@ const WATCH_ENDSCREEN_SELECTORS = {
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
 
-  // there is small (but breaking) difference between anonymous view and logged user
-  const wrapper = await find(pageRoot, "#related :is(#items:not(:has(#contents)):has(#video-title), #items #contents)")
+  const relatedItems = await find(pageRoot, "#related #items") // first step, otherwise first node is missed on fresh start
+  const container = await find(relatedItems, "#contents")
   const recyclingCallback = recyclerCallback(videoCallback)
 
-  observeDirectChildrens(wrapper, recyclingCallback)
+  observeDirectChildrens(container, recyclingCallback)
 }
 
 async function watchPlaylistObserver(root, videoCallback) {
