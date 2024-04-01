@@ -1,8 +1,5 @@
 async function blur(video, channels, keywords) {
-  const titleNode = video.queryTitle()
-  console.assert(titleNode != null, "title node was null", video)
-
-  const title = titleNode.textContent
+  const title = video.queryTitle().textContent
   const channel = video.queryChannel()?.textContent
 
   console.table({
