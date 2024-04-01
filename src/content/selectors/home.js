@@ -6,7 +6,7 @@ async function homePageObserver(root, videoCallback) {
   const slotObserver = new DirectChildObserver(recyclingCallback)
 
   observeDirectChildrens(scroll, row => {
-    row.querySelectorAll("#contents > * #content:not(:has(#content))").forEach(slot => {
+    row.querySelectorAll("#contents > * #content:not(:has(#content)):has(img)").forEach(slot => {
       slotObserver.observe(slot)
     })
   })
