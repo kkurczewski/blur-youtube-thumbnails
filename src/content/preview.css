@@ -1,0 +1,10 @@
+#page-manager > ytd-watch-flexy #thumbnail:has(#mouseover-overlay img) #overlays {
+  /* fixes blurred video duration on watch page preview */
+  display: none;
+}
+
+/* global node reused on home and search pages */
+#video-preview #thumbnail-container {
+  /* hides thumbnail before video preview */
+  display: none;
+}
