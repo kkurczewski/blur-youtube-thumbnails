@@ -15,7 +15,11 @@ async function watchPageObserver(root, videoCallback) {
   const container = await find(relatedItems, "#contents")
   const recyclingCallback = recyclerCallback(videoCallback)
 
-  observeDirectChildrens(container, recyclingCallback)
+  observeDirectChildrens(container, video => {
+    if (video.matches("ytd-compact-video-renderer")) {
+      recyclingCallback(video)
+    }
+  })
 }
 
 async function watchPlaylistObserver(root, videoCallback) {
