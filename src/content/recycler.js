@@ -25,9 +25,8 @@ function recyclerCallback(callback) {
       subtree: true,
     }
     const title = video.queryTitle()
-    console.assert(title != null, "title node was null")
-
     recycler.observe(title, config)
+
     const channel = video.queryChannel()
     if (channel != null) {
       recycler.observe(channel, config)
