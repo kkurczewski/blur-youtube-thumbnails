@@ -4,15 +4,15 @@ async function resultsPageObserver(root, videoCallback) {
 
   const callback = recyclerCallback(videoCallback)
 
+  const ITEMS_CONTAINER = "#items"
   const wrapperObserver = new DirectChildObserver(element => {
-    if (element.matches(":has(#items #video-title")) {
+    if (element.matches(`:has(${ITEMS_CONTAINER} ${THUMBNAIL_SELECTOR})`)) {
       // video container
-      wrapperObserver.observe(element.querySelector("#items"))
-    } else if (element.matches(":has(#video-title)")) {
+      wrapperObserver.observe(element.querySelector(ITEMS_CONTAINER))
+    } else if (element.matches(`:has(${THUMBNAIL_SELECTOR})`)) {
       // single video
       callback(element)
     }
-    // channel renderer has no title, ignore
   })
 
   observeDirectChildrens(scroll, async page => {

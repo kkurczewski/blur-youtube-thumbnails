@@ -3,6 +3,7 @@ const VIDEO_SELECTORS = {
   channel: "ytd-channel-name #text",
   title: "#video-title",
 }
+const THUMBNAIL_SELECTOR = "a#thumbnail:is([href^='/watch'],[href^='/shorts'])"
 
 window.addEventListener("load", async () => {
   console.debug("Blur loaded")

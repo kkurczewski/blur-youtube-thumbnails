@@ -16,7 +16,7 @@ async function watchPageObserver(root, videoCallback) {
   const recyclingCallback = recyclerCallback(videoCallback)
 
   observeDirectChildrens(container, video => {
-    if (video.matches("ytd-compact-video-renderer")) {
+    if (video.matches(`:has(${THUMBNAIL_SELECTOR})`)) {
       recyclingCallback(video)
     }
   })

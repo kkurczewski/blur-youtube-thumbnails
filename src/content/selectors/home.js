@@ -4,15 +4,15 @@ async function homePageObserver(root, videoCallback) {
 
   const recyclingCallback = recyclerCallback(videoCallback)
   const slotObserver = new DirectChildObserver(node => {
-    // observe all slots for changes
-    if (node.matches(":has(a#thumbnail:is([href^='/watch'],[href^='/shorts']))")) {
-      // but apply blur only on videos or shorts
+    // observe all slots for changes...
+    if (node.matches(`:has(${THUMBNAIL_SELECTOR})`)) {
+      // ...but apply blur only on videos or shorts
       recyclingCallback(node)
     }
   })
 
+  const CONTENT_SLOT = "#content:not(:has(#content))"
   observeDirectChildrens(scroll, row => {
-    const CONTENT_SLOT = "#content:not(:has(#content))"
     row.querySelectorAll(`${CONTENT_SLOT}`).forEach(slot => {
       slotObserver.observe(slot)
     })
