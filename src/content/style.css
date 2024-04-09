@@ -1,7 +1,8 @@
 .blur :is(#thumbnail, .thumbnail-wrapper) img,
 .blur #thumbnail #mouseover-overlay img,
 .ytp-endscreen-content .blur div,
-:has(.blur:hover) #video-preview video {
+:has(.blur:hover) #video-preview video,
+#video-preview :hover video {
   --blur: 15px;
 
   filter: blur(var(--blur));

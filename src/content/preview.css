@@ -8,3 +8,8 @@
   /* hides thumbnail before video preview */
   display: none;
 }
+
+#video-preview :not(video) {
+  /* fixes blur on search page when preview video is enabled */
+  pointer-events: none;
+}
