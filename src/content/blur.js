@@ -1,3 +1,12 @@
+/**
+ * @typedef {queryTitle: () => HTMLElement, queryChannel: () => HTMLElement} Video
+ * 
+ * @param {Video} video
+ * @param {{blacklist, whitelist}} channels
+ * @param {{blacklist, whitelist}} keywords
+ * 
+ * @returns {boolean} true if video was blurred
+ */
 async function blur(video, channels, keywords) {
   const title = video.queryTitle().textContent
   const channel = video.queryChannel()?.textContent

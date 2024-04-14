@@ -1,3 +1,11 @@
+/**
+ * @typedef {queryTitle: () => HTMLElement, queryChannel: () => HTMLElement} Video
+ * 
+ * @param {HTMLElement} node
+ * @param {{title, channel}} selectors
+ * 
+ * @returns {Video}
+ */
 async function buildVideoNode(node, selectors) {
   // bind selectors to video node, this simplifies passing selectors to recycler
   // and allows to register recycler inside home page instead of polluting index file

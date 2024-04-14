@@ -1,3 +1,9 @@
+/**
+ * @param {HTMLElement} target 
+ * @param {string} selector 
+ * 
+ * @returns {Promise<HTMLElement>}
+ */
 function find(target, selector) {
   return new Promise(resolve => {
     const observer = new MutationObserver((_, observer) => tryResolve(observer))
@@ -16,6 +22,10 @@ function find(target, selector) {
   })
 }
 
+/**
+ * @param {HTMLElement} target
+ * @param {(HTMLElement) => void} callback 
+ */
 function observeDirectChildrens(target, callback) {
   const observer = new DirectChildObserver(callback)
   observer.observe(target)
@@ -25,6 +35,9 @@ class DirectChildObserver {
   #observer
   #callback
 
+  /**
+   * @param {(HTMLElement) => void} callback 
+   */
   constructor(callback) {
     this.#observer = new MutationObserver(mutations => {
       mutations.forEach(({ addedNodes }) => {
@@ -34,6 +47,9 @@ class DirectChildObserver {
     this.#callback = callback
   }
 
+  /**
+   * @param {HTMLElement} target
+   */
   observe(target) {
     this.#observer.observe(target, { childList: true })
     for (const child of target.children) {

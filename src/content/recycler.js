@@ -1,3 +1,8 @@
+/**
+ * @param {(HTMLElement) => void} callback
+ * 
+ * @returns {(HTMLElement) => void}
+ */
 function recyclerCallback(callback) {
   const RECYCLABLE_CLASS = "recyclable"
   const RECYCLABLE_SELECTOR = `.${RECYCLABLE_CLASS}`
@@ -15,7 +20,7 @@ function recyclerCallback(callback) {
     })
   })
 
-  async function _callback(video) {
+  function _callback(video) {
     callback(video)
     video.classList.add(RECYCLABLE_CLASS)
 
