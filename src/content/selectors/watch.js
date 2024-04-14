@@ -32,7 +32,12 @@ async function watchPlaylistObserver(root, videoCallback) {
 // watch page, endscreen suggestions
 async function watchEndscreen(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
-  const container = await find(pageRoot, ".ytp-endscreen-content")
+  const player = await find(pageRoot, "#movie_player")
 
-  observeDirectChildrens(container, videoCallback)
+  observeDirectChildrens(player, container => {
+    if (container.matches(":has(> .ytp-endscreen-content)")) {
+      const endscreen = container.querySelector(".ytp-endscreen-content")
+      observeDirectChildrens(endscreen, videoCallback)
+    }
+  })
 }
