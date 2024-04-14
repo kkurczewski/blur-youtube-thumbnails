@@ -10,9 +10,9 @@ const WATCH_ENDSCREEN_SELECTORS = {
 
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
+  const relatedItems = await find(pageRoot, "#related") // first step, limit deep search scope
 
-  const relatedItems = await find(pageRoot, "#related #items") // first step, otherwise first node is missed on fresh start
-  const container = await find(relatedItems, "#contents")
+  const container = await find(relatedItems, ":has(> ytd-compact-video-renderer)", true) // deep search, ignore DOM structure
   const recyclingCallback = recyclerCallback(videoCallback)
 
   observeDirectChildrens(container, video => {
