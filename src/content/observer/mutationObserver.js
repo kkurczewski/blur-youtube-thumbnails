@@ -24,7 +24,7 @@ function find(target, selector, subtree = false) {
 
 /**
  * @param {HTMLElement} target
- * @param {(HTMLElement) => void} callback 
+ * @param {VideoCallback} callback 
  */
 function observeDirectChildrens(target, callback) {
   const observer = new DirectChildObserver(callback)
@@ -36,7 +36,7 @@ class DirectChildObserver {
   #callback
 
   /**
-   * @param {(HTMLElement) => void} callback 
+   * @param {VideoCallback} callback
    */
   constructor(callback) {
     this.#observer = new MutationObserver(mutations => {

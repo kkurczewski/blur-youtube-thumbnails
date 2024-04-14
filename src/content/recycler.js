@@ -1,7 +1,12 @@
 /**
- * @param {(HTMLElement) => void} callback
- * 
- * @returns {(HTMLElement) => void}
+ * @callback VideoCallback
+ * @param {HTMLElement} video 
+ * @returns {void}
+ */
+
+/**
+ * @param {VideoCallback} callback 
+ * @returns {VideoCallback}
  */
 function recyclerCallback(callback) {
   const RECYCLABLE_CLASS = "recyclable"
