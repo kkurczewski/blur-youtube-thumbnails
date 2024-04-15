@@ -8,10 +8,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "host_permissions": [
-    "https://www.youtube.com/*",
-    "https://m.youtube.com/*"
-  ],
   "options_ui": {
     "page": "options/index.html",
     "open_in_tab": true
