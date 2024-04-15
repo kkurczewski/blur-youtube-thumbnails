@@ -7,6 +7,9 @@ const keywords = {
   blacklist: [".*"],
 }
 
+// @ts-ignore
+/** @typedef {import("chrome")} */
+
 chrome.runtime.onInstalled.addListener(async () => {
   const options = await chrome.storage.local.get()
   if (Object.entries(options).length === 0) {
