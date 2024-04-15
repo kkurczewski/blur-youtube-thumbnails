@@ -1,5 +1,5 @@
 // watch page, right panel
-
+/** @param {VideoCallback} videoCallback */
 async function watchPageObserver(root, videoCallback) {
   const watch = await find(root, "ytm-watch")
   const content = await find(watch, ".watch-content")

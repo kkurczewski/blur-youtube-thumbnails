@@ -1,4 +1,5 @@
 // mobile home page
+/** @param {VideoCallback} videoCallback */
 async function homePageObserver(root, videoCallback) {
   const browse = await find(root, "ytm-browse")
   const tab = await find(browse, ".tab-content")
@@ -7,6 +8,7 @@ async function homePageObserver(root, videoCallback) {
   observeDirectChildrens(contents, videoCallback)
 }
 
+/** @param {VideoCallback} videoCallback */
 async function homePageShortsObserver(root, videoCallback) {
   const browse = await find(root, "ytm-browse")
   const tab = await find(browse, ".tab-content")

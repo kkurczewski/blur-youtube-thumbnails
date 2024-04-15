@@ -8,6 +8,7 @@ const WATCH_ENDSCREEN_SELECTORS = {
   title: ".ytp-videowall-still-info-title",
 }
 
+/** @param {VideoCallback} videoCallback */
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const relatedItems = await find(pageRoot, "#related") // first step, limit deep search scope
@@ -22,6 +23,7 @@ async function watchPageObserver(root, videoCallback) {
   })
 }
 
+/** @param {VideoCallback} videoCallback */
 async function watchPlaylistObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const container = await find(pageRoot, "#playlist #items")
@@ -30,6 +32,7 @@ async function watchPlaylistObserver(root, videoCallback) {
 }
 
 // watch page, endscreen suggestions
+/** @param {VideoCallback} videoCallback */
 async function watchEndscreen(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const player = await find(pageRoot, "#movie_player")

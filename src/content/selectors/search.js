@@ -1,3 +1,4 @@
+/** @param {VideoCallback} videoCallback */
 async function resultsPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-search")
   const scroll = await find(pageRoot, "#primary #contents")

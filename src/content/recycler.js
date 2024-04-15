@@ -1,6 +1,6 @@
 /**
  * @callback VideoCallback
- * @param {HTMLElement} video 
+ * @param {Element} video 
  * @returns {void}
  */
 
@@ -14,7 +14,7 @@ function recyclerCallback(callback) {
 
   const recycler = new MutationObserver(mutations => {
     mutations.forEach(({ addedNodes }) => {
-      addedNodes.forEach(node => {
+      addedNodes.forEach(/** @param {?Element} node */ node => {
         if (node?.closest == null) {
           node = node.parentElement
         }
@@ -25,6 +25,7 @@ function recyclerCallback(callback) {
     })
   })
 
+  /** @param {Video & Element} video */
   function _callback(video) {
     callback(video)
     video.classList.add(RECYCLABLE_CLASS)

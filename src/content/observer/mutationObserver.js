@@ -1,8 +1,8 @@
 /**
- * @param {HTMLElement} target 
+ * @param {Element} target 
  * @param {string} selector 
  * 
- * @returns {Promise<HTMLElement>}
+ * @returns {Promise<Element>}
  */
 function find(target, selector, subtree = false) {
   return new Promise(resolve => {
@@ -23,7 +23,7 @@ function find(target, selector, subtree = false) {
 }
 
 /**
- * @param {HTMLElement} target
+ * @param {Element} target
  * @param {VideoCallback} callback 
  */
 function observeDirectChildrens(target, callback) {
@@ -35,9 +35,7 @@ class DirectChildObserver {
   #observer
   #callback
 
-  /**
-   * @param {VideoCallback} callback
-   */
+  /** @param {VideoCallback} callback */
   constructor(callback) {
     this.#observer = new MutationObserver(mutations => {
       mutations.forEach(({ addedNodes }) => {
@@ -47,9 +45,7 @@ class DirectChildObserver {
     this.#callback = callback
   }
 
-  /**
-   * @param {HTMLElement} target
-   */
+  /** @param {Element} target */
   observe(target) {
     this.#observer.observe(target, { childList: true })
     for (const child of target.children) {

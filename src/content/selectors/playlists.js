@@ -3,6 +3,7 @@ const PLAYLIST_SELECTORS = {
   title: "#video-title, ytd-playlist-header-renderer #text",
 }
 
+/** @param {VideoCallback} videoCallback */
 async function playlistPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-browse[page-subtype=playlist]")
 
