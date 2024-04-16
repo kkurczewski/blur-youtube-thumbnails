@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Blurred thumbnails",
-  "version": "1.5.4",
+  "version": "1.5.4.1",
   "description": "Blur thumbnails on YT page for whatever reason",
   "icons": {
     "16": "icons/icon16.png",
@@ -35,7 +35,8 @@
       "css": [
         "content/style.css",
         "content/preview.css"
-      ]
+      ],
+      "run_at": "document_start"
     },
     {
       "matches": [
@@ -51,7 +52,8 @@
       ],
       "css": [
         "content/style.m.css"
-      ]
+      ],
+      "run_at": "document_start"
     }
   ],
   "permissions": [
