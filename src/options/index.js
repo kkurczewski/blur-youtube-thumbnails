@@ -6,8 +6,8 @@ window.onload = async () => {
   console.log(options)
 
   populateForm()
-  document.querySelector("#save").onclick = saveTags
-  document.querySelector("#matcher input").oninput = matchTags
+  document.querySelector("#save").addEventListener("click", saveTags)
+  document.querySelector("#matcher input").addEventListener("input", matchTags)
 
   function populateForm() {
     loadTags()
@@ -32,12 +32,14 @@ window.onload = async () => {
     }
 
     function loadSettings() {
-      document.querySelectorAll("#settings input[type=checkbox]").forEach(checkbox => {
-        checkbox.checked = options[checkbox.id]
-        checkbox.onchange = e => {
+      document.querySelectorAll("#settings input[type=checkbox]").forEach(cbox => {
+        // @ts-ignore
+        cbox.checked = options[cbox.id]
+        cbox.addEventListener("change", e => {
           const target = e.target
+          // @ts-ignore
           saveOptions({ [target.id]: target.checked })
-        }
+        })
       })
     }
   }
@@ -52,8 +54,10 @@ window.onload = async () => {
     }
     saveOptions(options)
 
+    /** @param {Element} list */
     function extractValues(list) {
-      return Array.from(list.children)
+      return [...list.children]
+        // @ts-ignore
         .map(child => child.innerText)
         .filter(value => value)
     }
@@ -64,7 +68,9 @@ window.onload = async () => {
     if (!input) {
       return
     }
+
     document.querySelectorAll(`ul:is(${TAG_TYPES}) li`).forEach(node => {
+      // @ts-ignore
       const tagValue = node.innerText
       if (tagValue.length > 0) {
         const matches = input.match(RegExp(tagValue, "i")) != null
