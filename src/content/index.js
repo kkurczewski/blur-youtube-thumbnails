@@ -22,7 +22,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     resultsPageObserver(pageManager, _blur(VIDEO_SELECTORS))
   }
 
+  /** @param {Selectors} selectors */
   function _blur(selectors) {
-    return async video => blur(await buildVideoNode(video, selectors), channels, keywords)
+    return async (/** @type {Element} */ video) => blur(buildVideoNode(video, selectors), channels, keywords)
   }
 })
+
+/**
+ * @typedef Selectors
+ * @property {string} channel
+ * @property {string} title
+ */

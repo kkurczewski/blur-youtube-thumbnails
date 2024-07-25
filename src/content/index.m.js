@@ -24,7 +24,7 @@ window.addEventListener("load", async () => {
     }
   })
 
-  function _blur(selectors) {
-    return async video => blur(await buildVideoNode(video, selectors), channels, keywords)
+  function _blur(/** @type Selectors */ selectors) {
+    return async (/** @type {Element} */ video) => blur(buildVideoNode(video, selectors), channels, keywords)
   }
 })
