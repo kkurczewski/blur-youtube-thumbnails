@@ -10,7 +10,6 @@
  */
 function recyclerCallback(callback) {
   const RECYCLABLE_CLASS = "recyclable"
-  const RECYCLABLE_SELECTOR = `.${RECYCLABLE_CLASS}`
 
   const recycler = new MutationObserver(mutations => {
     mutations.forEach(({ addedNodes }) => {
@@ -18,7 +17,7 @@ function recyclerCallback(callback) {
         if (node?.closest == null) {
           node = node.parentElement
         }
-        node = node.closest(RECYCLABLE_SELECTOR)
+        node = node.closest(`.${RECYCLABLE_CLASS}`)
         console.log("Recycling video:", node)
         callback(node)
       })
