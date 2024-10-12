@@ -9,7 +9,7 @@
   display: none;
 }
 
-#video-preview :not(video) {
-  /* fixes blur on search page when preview video is enabled */
+/* prevents removing blur when preview is enabled */
+#video-preview > ytd-video-preview {
   pointer-events: none;
 }
