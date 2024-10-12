@@ -5,7 +5,7 @@ const VIDEO_SELECTORS = {
 }
 const THUMBNAIL_SELECTOR = "a#thumbnail:is([href^='/watch'],[href^='/shorts'])"
 
-window.addEventListener("load", async () => {
+window.addEventListener("DOMContentLoaded", async () => {
   console.debug("Blur loaded")
 
   const { channels, keywords, unblur, disableSearch } = await chrome.storage.local.get()
