@@ -17,6 +17,7 @@
 
 .unblur {
 
+  .blur img.yt-core-image:hover,
   .blur :is(#thumbnail, .thumbnail-wrapper) img:hover,
   .blur #thumbnail #mouseover-overlay :hover img,
   .ytp-endscreen-content .blur:hover div,
