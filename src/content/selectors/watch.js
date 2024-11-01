@@ -2,14 +2,14 @@
 const LVM_ITEMS = "#items #contents"
 
 // container for old 'ytd-compact-video-renderer' nodes, used for anonymous users
-const CVR_ITEMS = "#items.ytd-watch-next-secondary-results-renderer"
+const CVR_ITEMS = "#items.ytd-watch-next-secondary-results-renderer:not(:has(> yt-related-chip-cloud-renderer))";
 
 /** @param {VideoCallback} videoCallback */
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const relatedItems = await find(pageRoot, "#related") // first step, limit deep search scope
 
-  const container = await find(relatedItems, `:is(${LVM_ITEMS}, ${CVR_ITEMS}`, true) // deep search, ignore DOM structure
+  const container = await find(relatedItems, `:is(${LVM_ITEMS}, ${CVR_ITEMS})`, true) // deep search, ignore DOM structure
   const recyclingCallback = recyclerCallback(videoCallback)
 
   observeDirectChildrens(container, video => {
