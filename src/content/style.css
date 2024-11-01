@@ -30,3 +30,8 @@
     transition-duration: 3s;
   }
 }
+
+/* prevent blur on avatars on home page */
+img.yt-core-image[src^='https://yt3.ggpht.com/'] {
+  filter: none;
+}
