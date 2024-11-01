@@ -5,6 +5,13 @@ const VIDEO_SELECTORS = {
 }
 const THUMBNAIL_SELECTOR = "a#thumbnail:is([href^='/watch'],[href^='/shorts'])"
 
+const VIDEO_LINK = "a:is([href^='/watch'],[href^='/shorts'])"
+const CHANNEL_LINK = "a[href^='/@']"
+const UNIVERSAL_SELECTORS = {
+  title: VIDEO_LINK,
+  channel: CHANNEL_LINK,
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
   console.debug("Blur loaded")
 

@@ -1,6 +1,8 @@
+.blur img.yt-core-image,
 .blur :is(#thumbnail, .thumbnail-wrapper) img,
 .blur #thumbnail #mouseover-overlay img,
 .ytp-endscreen-content .blur div,
+.blur img[src^='https://i.ytimg.com/vi/'],
 :has(.blur:hover) #video-preview video,
 #video-preview :hover video {
   --blur: 15px;
