@@ -1,8 +1,6 @@
-.blur img.yt-core-image,
-.blur :is(#thumbnail, .thumbnail-wrapper) img,
-.blur #thumbnail #mouseover-overlay img,
-.ytp-endscreen-content .blur div,
+.blur #thumbnail .yt-core-image,
 .blur img[src^='https://i.ytimg.com/vi/'],
+.blur .ytp-videowall-still-image,
 :has(.blur:hover) #video-preview video,
 #video-preview :hover video {
   --blur: 15px;
@@ -17,10 +15,9 @@
 
 .unblur {
 
-  .blur img.yt-core-image:hover,
-  .blur :is(#thumbnail, .thumbnail-wrapper) img:hover,
+  .blur #thumbnail .yt-core-image:hover,
   .blur #thumbnail #mouseover-overlay :hover img,
-  .ytp-endscreen-content .blur:hover div,
+  .blur:hover .ytp-videowall-still-image,
   #video-preview [playing] video {
     filter: unset;
     -webkit-filter: unset;
@@ -30,9 +27,4 @@
     transition-timing-function: ease-in;
     transition-duration: 3s;
   }
-}
-
-/* prevent blur on avatars on home page */
-img.yt-core-image[src^='https://yt3.ggpht.com/'] {
-  filter: none;
 }
