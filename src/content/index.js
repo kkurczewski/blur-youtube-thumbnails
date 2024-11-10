@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   homePageObserver(pageManager, _blur(VIDEO_SELECTORS))
   watchPageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  playlistPageObserver(pageManager, _blur(PLAYLIST_SELECTORS))
+  playlistPageObserver(pageManager, _blur(VIDEO_SELECTORS))
   watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
   watchEndscreen(pageManager, _blur(WATCH_ENDSCREEN_SELECTORS))
 
