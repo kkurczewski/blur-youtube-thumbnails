@@ -7,10 +7,10 @@ async function resultsPageObserver(root, videoCallback) {
 
   const ITEMS_CONTAINER = "#items"
   const wrapperObserver = new DirectChildObserver(element => {
-    if (element.matches(`:has(${ITEMS_CONTAINER} ${THUMBNAIL_SELECTOR})`)) {
+    if (element.matches(`:has(${ITEMS_CONTAINER} ${VIDEO_LINK})`)) {
       // video container
       wrapperObserver.observe(element.querySelector(ITEMS_CONTAINER))
-    } else if (element.matches(`:has(${THUMBNAIL_SELECTOR})`)) {
+    } else if (element.matches(`:has(${VIDEO_LINK})`)) {
       // single video
       callback(element)
     }

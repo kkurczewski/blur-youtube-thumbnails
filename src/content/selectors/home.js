@@ -6,7 +6,7 @@ async function homePageObserver(root, videoCallback) {
   const recyclingCallback = recyclerCallback(videoCallback)
   const slotObserver = new DirectChildObserver(node => {
     // observe all slots for changes...
-    if (node.matches(`:has(${THUMBNAIL_SELECTOR})`)) {
+    if (node.matches(`:has(${VIDEO_LINK})`)) {
       // ...but apply blur only on videos or shorts
       recyclingCallback(node)
     }
