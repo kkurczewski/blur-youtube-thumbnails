@@ -1,7 +1,7 @@
 // generic selector
 const VIDEO_SELECTORS = {
   channel: "ytd-channel-name #text",
-  title: "#video-title",
+  title: ":is(#video-title, a[href^='/shorts']:not(:has(img)))",
 }
 const VIDEO_LINK = "a:is([href^='/watch'],[href^='/shorts'])"
 
