@@ -1,9 +1,12 @@
+const SHORT_TITLE = "a[href^='/shorts']:not(:has(img))"
+const YT_MIX_TITLE = "yt-lockup-view-model a[href^='/watch']"
+const VIDEO_LINK = "a:is([href^='/watch'],[href^='/shorts'])"
+
 // generic selector
 const VIDEO_SELECTORS = {
-  channel: "ytd-channel-name #text",
-  title: ":is(#video-title, a[href^='/shorts']:not(:has(img)))",
+  title: `#video-title, ${YT_MIX_TITLE}, ${SHORT_TITLE}`,
+  channel: "#channel-name #text",
 }
-const VIDEO_LINK = "a:is([href^='/watch'],[href^='/shorts'])"
 
 window.addEventListener("DOMContentLoaded", async () => {
   console.debug("Blur loaded")
@@ -13,7 +16,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const pageManager = await find(document.body, "#page-manager")
 
   homePageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  watchPageObserver(pageManager, _blur(WATCH_NEXT_SELECTORS))
+  watchPageObserver(pageManager, _blur(VIDEO_SELECTORS))
   playlistPageObserver(pageManager, _blur(PLAYLIST_SELECTORS))
   watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
   watchEndscreen(pageManager, _blur(WATCH_ENDSCREEN_SELECTORS))

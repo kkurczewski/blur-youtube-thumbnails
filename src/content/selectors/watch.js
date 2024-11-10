@@ -1,14 +1,3 @@
-const CVR_TITLE = "ytd-compact-video-renderer #video-title"
-const LVM_TITLE = "yt-lockup-view-model a[href^='/watch']"
-
-const CVR_CHANNEL = "ytd-compact-video-renderer #channel-name #text"
-const LVM_CHANNEL = "yt-lockup-view-model a[href^='/@']"
-
-const WATCH_NEXT_SELECTORS = {
-  title: `:is(${CVR_TITLE}, ${LVM_TITLE})`,
-  channel: `:is(${CVR_CHANNEL}, ${LVM_CHANNEL})`,
-}
-
 const ITEM_CONTAINER_LOGGED = "#items #contents"
 const ITEM_CONTAINER_ANONYMOUS = "#items.ytd-watch-next-secondary-results-renderer:not(:has(> yt-related-chip-cloud-renderer))"
 
