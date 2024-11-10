@@ -1,15 +1,23 @@
-// container for new 'yt-lockup-view-model' nodes, used for logged users
-const LVM_ITEMS = "#items #contents"
+const CVR_TITLE = "ytd-compact-video-renderer #video-title"
+const LVM_TITLE = "yt-lockup-view-model a[href^='/watch']"
 
-// container for old 'ytd-compact-video-renderer' nodes, used for anonymous users
-const CVR_ITEMS = "#items.ytd-watch-next-secondary-results-renderer:not(:has(> yt-related-chip-cloud-renderer))";
+const CVR_CHANNEL = "ytd-compact-video-renderer #channel-name #text"
+const LVM_CHANNEL = "yt-lockup-view-model a[href^='/@']"
+
+const WATCH_NEXT_SELECTORS = {
+  title: `:is(${CVR_TITLE}, ${LVM_TITLE})`,
+  channel: `:is(${CVR_CHANNEL}, ${LVM_CHANNEL})`,
+}
+
+const ITEM_CONTAINER_LOGGED = "#items #contents"
+const ITEM_CONTAINER_ANONYMOUS = "#items.ytd-watch-next-secondary-results-renderer:not(:has(> yt-related-chip-cloud-renderer))"
 
 /** @param {VideoCallback} videoCallback */
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const relatedItems = await find(pageRoot, "#related") // first step, limit deep search scope
 
-  const container = await find(relatedItems, `:is(${LVM_ITEMS}, ${CVR_ITEMS})`, true) // deep search, ignore DOM structure
+  const container = await find(relatedItems, `:is(${ITEM_CONTAINER_LOGGED}, ${ITEM_CONTAINER_ANONYMOUS})`, true) // deep search, ignore DOM structure
   const recyclingCallback = recyclerCallback(videoCallback)
 
   observeDirectChildrens(container, video => {

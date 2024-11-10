@@ -12,8 +12,8 @@
 * @returns {boolean} true if video was blurred
 */
 function blur(video, channels, keywords) {
-  const title = video.queryTitle().textContent
-  const channel = video.queryChannel()?.textContent
+  const title = video.queryTitle()?.textContent?.trim()
+  const channel = video.queryChannel()?.textContent?.trim()
 
   console.table({
     title,

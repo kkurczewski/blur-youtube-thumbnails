@@ -7,10 +7,6 @@ const THUMBNAIL_SELECTOR = "a#thumbnail:is([href^='/watch'],[href^='/shorts'])"
 
 const VIDEO_LINK = "a:is([href^='/watch'],[href^='/shorts'])"
 const CHANNEL_LINK = "a[href^='/@']"
-const UNIVERSAL_SELECTORS = {
-  title: VIDEO_LINK,
-  channel: CHANNEL_LINK,
-}
 
 window.addEventListener("DOMContentLoaded", async () => {
   console.debug("Blur loaded")
@@ -20,7 +16,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const pageManager = await find(document.body, "#page-manager")
 
   homePageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  watchPageObserver(pageManager, _blur(UNIVERSAL_SELECTORS))
+  watchPageObserver(pageManager, _blur(WATCH_NEXT_SELECTORS))
   playlistPageObserver(pageManager, _blur(PLAYLIST_SELECTORS))
   watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
   watchEndscreen(pageManager, _blur(WATCH_ENDSCREEN_SELECTORS))
