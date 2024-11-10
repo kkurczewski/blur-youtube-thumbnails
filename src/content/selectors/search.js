@@ -5,13 +5,12 @@ async function resultsPageObserver(root, videoCallback) {
 
   const callback = recyclerCallback(videoCallback)
 
-  const ITEMS_CONTAINER = "#items"
+  const NESTED_LIST = "#items:not(ytd-video-renderer *)" // exclude videos with chapters
   const wrapperObserver = new DirectChildObserver(element => {
-    if (element.matches(`:has(${ITEMS_CONTAINER} ${VIDEO_LINK})`)) {
-      // video container
-      wrapperObserver.observe(element.querySelector(ITEMS_CONTAINER))
+    const nestedList = element.querySelector(NESTED_LIST)
+    if (nestedList != null) {
+      wrapperObserver.observe(nestedList)
     } else if (element.matches(`:has(${VIDEO_LINK})`)) {
-      // single video
       callback(element)
     }
   })
