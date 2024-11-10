@@ -1,3 +1,8 @@
+const VIDEO_WITH_CHAPTERS = ":scope :has(a[href^='/watch']) ~ * #items"
+
+// assumes that valid video list never has links before list itself
+const NESTED_LIST = `#items:not(${VIDEO_WITH_CHAPTERS})`
+
 /** @param {VideoCallback} videoCallback */
 async function resultsPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-search")
@@ -5,7 +10,6 @@ async function resultsPageObserver(root, videoCallback) {
 
   const callback = recyclerCallback(videoCallback)
 
-  const NESTED_LIST = "#items:not(ytd-video-renderer *)" // exclude videos with chapters
   const wrapperObserver = new DirectChildObserver(element => {
     const nestedList = element.querySelector(NESTED_LIST)
     if (nestedList != null) {
