@@ -1,14 +1,16 @@
 const ITEM_CONTAINER_LOGGED = "#items #contents"
-const ITEM_CONTAINER_ANONYMOUS = "#items.ytd-watch-next-secondary-results-renderer:not(:has(> yt-related-chip-cloud-renderer))"
+const ITEM_CONTAINER_ANONYMOUS = "#items:not(:has(#contents))"
 
 /** @param {VideoCallback} videoCallback */
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
-  const relatedItems = await find(pageRoot, "#related") // first step, limit deep search scope
+  const relatedItems = await find(pageRoot, "#related")
 
-  const container = await find(relatedItems, `:is(${ITEM_CONTAINER_LOGGED}, ${ITEM_CONTAINER_ANONYMOUS})`, true) // deep search, ignore DOM structure
+  const ITEM_CONTAINER_LOADED = `:has(${VIDEO_LINK}):is(${ITEM_CONTAINER_LOGGED}, ${ITEM_CONTAINER_ANONYMOUS})`
+  const container = await find(relatedItems, ITEM_CONTAINER_LOADED, true) // deep search, ignore DOM structure
+  console.debug("Found", container)
+
   const recyclingCallback = recyclerCallback(videoCallback)
-
   observeDirectChildrens(container, video => {
     if (video.matches(`:has(${VIDEO_LINK})`)) {
       recyclingCallback(video)
