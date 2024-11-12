@@ -20,7 +20,7 @@ function blur(video, channels, keywords) {
     channel,
     blurred: isBlacklisted() && !isWhitelisted(),
   })
-  console.debug(title, channel, video)
+  console.trace(title, channel, video)
 
   return video.classList.toggle("blur", isBlacklisted() && !isWhitelisted())
 
