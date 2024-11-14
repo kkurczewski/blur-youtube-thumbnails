@@ -28,3 +28,13 @@
     transition-duration: 3s;
   }
 }
+
+/* fix transparency for div-based post-live screen */
+.blur .ytp-videowall-still-image {
+  backdrop-filter: opacity(1.0);
+}
+
+/* fix blurry edges for endscreen */
+.blur a > .ytp-videowall-still-image {
+  border: 8px;
+}
