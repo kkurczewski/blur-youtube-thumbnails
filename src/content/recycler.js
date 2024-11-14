@@ -17,9 +17,13 @@ function recyclerCallback(callback) {
         if (node?.closest == null) {
           node = node.parentElement
         }
-        node = node.closest(`.${RECYCLABLE_CLASS}`)
-        console.log("Recycling video:", node)
-        callback(node)
+
+        // sometines mutated element is removed from DOM after being added and then lookup will return null
+        const recyclable = node.closest(`.${RECYCLABLE_CLASS}`)
+        if (recyclable != null) {
+          console.trace("Recycling video:", recyclable)
+          callback(recyclable)
+        }
       })
     })
   })
