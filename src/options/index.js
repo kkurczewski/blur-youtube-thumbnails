@@ -58,7 +58,7 @@ window.onload = async () => {
     function extractValues(list) {
       return [...list.children]
         // @ts-ignore
-        .map(child => child.innerText)
+        .map(child => child.innerText.trim())
         .filter(value => value)
     }
   }
