@@ -145,6 +145,9 @@ ul:is(.whitelist, .blacklist) {
 
     font-weight: 500;
     font-size: 12px;
+
+    min-width: 16px;
+    text-align: center;
   }
 
   li:last-child:not(:focus-visible) {
@@ -179,6 +182,10 @@ ul.blacklist li {
 :has(#matcher input:focus):has(.whitelist .highlight) .blacklist li {
   background-color: #dddd;
   color: #0005;
+}
+
+#matcher {
+  margin-top: 30px;
 }
 
 #matcher input {
