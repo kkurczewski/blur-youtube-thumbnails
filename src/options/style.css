@@ -7,11 +7,11 @@ html, body, ul {
   --font-color: #484848;
 
   .whitelist {
-    --background-color: rgb(96, 160, 0, 0.7);
+    --background-color: rgb(12, 175, 65);
   }
 
   .blacklist {
-    --background-color: rgb(192, 80, 0, 0.7);
+    --background-color: rgb(215, 83, 20);
   }
 }
 
