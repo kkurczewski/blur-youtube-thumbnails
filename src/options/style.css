@@ -174,7 +174,9 @@ ul.blacklist li {
   color: white;
 }
 
-#matcher input, *:has(#matcher input:focus) ul:is(.whitelist, .blacklist) li:not(.highlight) {
+#matcher input,
+:has(#matcher input:focus) :is(.whitelist, .blacklist) :not(.highlight),
+:has(#matcher input:focus):has(.whitelist .highlight) .blacklist li {
   background-color: #dddd;
   color: #0005;
 }
