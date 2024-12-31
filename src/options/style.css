@@ -92,6 +92,8 @@ a {
   code {
     border-radius: 3px;
     background-color: #dddd;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   p {
