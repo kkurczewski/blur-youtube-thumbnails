@@ -65,10 +65,6 @@ window.onload = async () => {
 
   function matchTags(event) {
     const input = event.target.value
-    if (!input) {
-      return
-    }
-
     document.querySelectorAll(`ul:is(${TAG_TYPES}) li`).forEach(node => {
       // @ts-ignore
       const tagValue = node.innerText
