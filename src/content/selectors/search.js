@@ -3,7 +3,10 @@ const VIDEO_WITH_CHAPTERS = ":scope :has(a[href^='/watch']) ~ * #items"
 // assumes that valid video list never has links before list itself
 const NESTED_LIST = `#items:not(${VIDEO_WITH_CHAPTERS})`
 
-/** @param {VideoCallback} videoCallback */
+/**
+ * @param {Element} root
+ * @param {VideoCallback} videoCallback 
+ */
 async function resultsPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-search")
   const scroll = await find(pageRoot, "#primary #contents")

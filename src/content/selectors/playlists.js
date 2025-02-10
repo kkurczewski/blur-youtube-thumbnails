@@ -1,4 +1,7 @@
-/** @param {VideoCallback} videoCallback */
+/**
+ * @param {Element} root
+ * @param {VideoCallback} videoCallback 
+ */
 async function playlistPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-browse[page-subtype=playlist]")
 
@@ -11,7 +14,10 @@ const WATCH_PLAYLIST_SELECTORS = {
   channel: "#byline",
 }
 
-/** @param {VideoCallback} videoCallback */
+/**
+ * @param {Element} root
+ * @param {VideoCallback} videoCallback 
+ */
 async function watchPlaylistObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const container = await find(pageRoot, "#playlist #items")

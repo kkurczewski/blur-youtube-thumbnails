@@ -1,7 +1,10 @@
 const ITEM_CONTAINER_LOGGED = "#items #contents"
 const ITEM_CONTAINER_ANONYMOUS = "#items:not(:has(#contents))"
 
-/** @param {VideoCallback} videoCallback */
+/**
+ * @param {Element} root
+ * @param {VideoCallback} videoCallback 
+ */
 async function watchPageObserver(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const relatedItems = await find(pageRoot, "#related")
@@ -24,7 +27,10 @@ const WATCH_ENDSCREEN_SELECTORS = {
 }
 
 // watch page, endscreen suggestions
-/** @param {VideoCallback} videoCallback */
+/**
+ * @param {Element} root
+ * @param {VideoCallback} videoCallback 
+ */
 async function watchEndscreen(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const player = await find(pageRoot, "#movie_player")
