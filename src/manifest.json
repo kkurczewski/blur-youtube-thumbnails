@@ -29,30 +29,12 @@
         "content/selectors/search.js",
         "content/selectors/playlists.js",
         "content/selectors/channel.js",
-        "content/video.js",
         "content/recycler.js",
         "content/index.js"
       ],
       "css": [
         "content/style.css",
         "content/preview.css"
-      ],
-      "run_at": "document_start"
-    },
-    {
-      "matches": [
-        "https://m.youtube.com/*"
-      ],
-      "js": [
-        "content/blur.js",
-        "content/observer/mutationObserver.js",
-        "content/selectors/home.m.js",
-        "content/selectors/watch.m.js",
-        "content/video.js",
-        "content/index.m.js"
-      ],
-      "css": [
-        "content/style.m.css"
       ],
       "run_at": "document_start"
     }
