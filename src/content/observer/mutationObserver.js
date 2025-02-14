@@ -12,6 +12,7 @@ function find(target, selector, subtree = false) {
     observer.observe(target, config)
     tryResolve(observer)
 
+    /** @param {MutationObserver} observer */
     function tryResolve(observer) {
       const node = target.querySelector(selector)
       if (node) {
@@ -24,7 +25,7 @@ function find(target, selector, subtree = false) {
 
 /**
  * @param {Element} target
- * @param {VideoCallback} callback 
+ * @param {(video: Element) => void} callback 
  */
 function observeDirectChildrens(target, callback) {
   const observer = new DirectChildObserver(callback)
@@ -35,7 +36,7 @@ class DirectChildObserver {
   #observer
   #callback
 
-  /** @param {VideoCallback} callback */
+  /** @param {(video: Element) => void} callback */
   constructor(callback) {
     this.#observer = new MutationObserver(mutations => {
       mutations.forEach(({ addedNodes }) => {

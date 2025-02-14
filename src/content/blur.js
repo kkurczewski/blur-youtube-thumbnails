@@ -1,28 +1,13 @@
 /**
- * @typedef Tags
- * @property {[string]} whitelist
- * @property {[string]} blacklist
- */
-
-/**
-* @param {Video & Element} video
+* @param {string} title
+* @param {string} channel
 * @param {Tags} channels
 * @param {Tags} keywords
 * 
-* @returns {boolean} true if video was blurred
+* @returns {boolean}
 */
-function blur(video, channels, keywords) {
-  const title = video.queryTitle()?.textContent?.trim()
-  const channel = video.queryChannel()?.textContent?.trim()
-
-  console.table({
-    title,
-    channel,
-    blurred: isBlacklisted() && !isWhitelisted(),
-  })
-  console.trace(title, channel, video)
-
-  return video.classList.toggle("blur", isBlacklisted() && !isWhitelisted())
+function matchKeywords(title, channel, channels, keywords) {
+  return isBlacklisted() && !isWhitelisted()
 
   function isBlacklisted() {
     const titleBlacklist = keywords.blacklist
@@ -53,7 +38,13 @@ function blur(video, channels, keywords) {
      * @param {string} key 
      */
     function matches(keywords, key) {
-      return (key != null) ? keywords.some(it => key.match(RegExp(it, "i")) != null) : null
+      return key != null ? keywords.some(it => key.match(RegExp(it, "i")) != null) : null
     }
   }
 }
+
+/**
+ * @typedef Tags
+ * @property {[string]} whitelist
+ * @property {[string]} blacklist
+ */

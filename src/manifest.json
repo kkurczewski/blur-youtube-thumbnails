@@ -28,6 +28,7 @@
         "content/selectors/watch.js",
         "content/selectors/search.js",
         "content/selectors/playlists.js",
+        "content/selectors/channel.js",
         "content/video.js",
         "content/recycler.js",
         "content/index.js"

@@ -1,12 +1,13 @@
 /**
  * @callback VideoCallback
- * @param {Element} video 
- * @returns {void}
+ * @param {Element} video
+ * 
+ * @returns {VideoElements}
  */
 
 /**
- * @param {VideoCallback} callback 
- * @returns {VideoCallback}
+ * @param {VideoCallback} callback
+ * @returns {(video: Element) => void}
  */
 function recyclerCallback(callback) {
   const RECYCLABLE_CLASS = "recyclable"
@@ -18,7 +19,7 @@ function recyclerCallback(callback) {
           node = node.parentElement
         }
 
-        // sometines mutated element is removed from DOM after being added and then lookup will return null
+        // sometimes mutated element is removed from DOM after being added and then lookup will return null
         const recyclable = node.closest(`.${RECYCLABLE_CLASS}`)
         if (recyclable != null) {
           console.trace("Recycling video:", recyclable)
@@ -28,9 +29,9 @@ function recyclerCallback(callback) {
     })
   })
 
-  /** @param {Video & Element} video */
-  function _callback(video) {
-    callback(video)
+  /** @param {Element} video */
+  function recyclingCallback(video) {
+    const { title, channel } = callback(video)
     video.classList.add(RECYCLABLE_CLASS)
 
     const config = {
@@ -38,14 +39,12 @@ function recyclerCallback(callback) {
       characterData: true,
       subtree: true,
     }
-    const title = video.queryTitle()
     recycler.observe(title, config)
 
-    const channel = video.queryChannel()
     if (channel != null) {
       recycler.observe(channel, config)
     }
   }
 
-  return _callback
+  return recyclingCallback
 }

@@ -11,28 +11,60 @@ const VIDEO_SELECTORS = {
 window.addEventListener("DOMContentLoaded", async () => {
   console.debug("Blur loaded")
 
+  // @ts-ignore
   const { channels, keywords, unblur, disableSearch } = await chrome.storage.local.get()
-  document.body.classList.toggle("unblur", unblur ?? false)
   const pageManager = await find(document.body, "#page-manager")
+  pageManager.classList.toggle("unblur", unblur ?? false)
 
-  homePageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  watchPageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  playlistPageObserver(pageManager, _blur(VIDEO_SELECTORS))
-  watchPlaylistObserver(pageManager, _blur(WATCH_PLAYLIST_SELECTORS))
-  watchEndscreen(pageManager, _blur(WATCH_ENDSCREEN_SELECTORS))
+  const genericSelector = querySelector(VIDEO_SELECTORS)
+
+  homePageObserver(pageManager, blur(genericSelector))
+  watchPageObserver(pageManager, blur(genericSelector))
+  playlistPageObserver(pageManager, blur(genericSelector))
+  watchPlaylistObserver(pageManager, blur(querySelector(WATCH_PLAYLIST_SELECTORS)))
+  watchEndscreen(pageManager, blur(querySelector(WATCH_ENDSCREEN_SELECTORS)))
 
   if (!disableSearch) {
-    resultsPageObserver(pageManager, _blur(VIDEO_SELECTORS))
+    resultsPageObserver(pageManager, blur(genericSelector))
   }
 
-  /** @param {Selectors} selectors */
-  function _blur(selectors) {
-    return async (/** @type {Element} */ video) => blur(buildVideoNode(video, selectors), channels, keywords)
+  // on channel page videos doesn't contain channel name, channel name is included only in top header
+  channelVideos(pageManager, blur(video => ({
+    title: video.querySelector(VIDEO_SELECTORS.title),
+    channel: document.querySelector("#page-manager > ytd-browse[page-subtype=channels] #page-header span"),
+  })))
+
+  /** @param {(video: Element) => VideoElements} selector */
+  function blur(selector) {
+    /** @param {Element} video */
+    return (video) => {
+      const selected = selector(video)
+      const { title, channel } = selected
+      const enabled = matchKeywords(title.textContent, channel?.textContent, channels, keywords)
+      video.classList.toggle("blur", enabled)
+
+      // return video elements for recycling
+      return selected
+    }
+  }
+
+  /** @param {VideoData} data */
+  function querySelector(data) {
+    return (/** @type {Element} */ video) => ({
+      title: video.querySelector(data.title),
+      channel: video.querySelector(data.channel), // channel is nullable (shorts)
+    })
   }
 })
 
 /**
- * @typedef Selectors
+ * @typedef VideoElements
+ * @property {Element} channel
+ * @property {Element} title
+ */
+
+/**
+ * @typedef VideoData
  * @property {string} channel
  * @property {string} title
  */
