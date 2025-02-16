@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     return (video) => {
       const selected = selector(video)
       const { title, channel } = selected
-      const enabled = matchKeywords(title.textContent, channel?.textContent, channels, keywords)
+      const enabled = matchKeywords(title.textContent.trim(), channel?.textContent?.trim(), channels, keywords)
       video.classList.toggle("blur", enabled)
 
       // return video elements for recycling
