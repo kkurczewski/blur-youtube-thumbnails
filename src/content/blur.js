@@ -7,7 +7,9 @@
 * @returns {boolean}
 */
 function matchKeywords(title, channel, channels, keywords) {
-  return isBlacklisted() && !isWhitelisted()
+  const blur = isBlacklisted() && !isWhitelisted()
+  console.table({ title, channel, blur })
+  return blur
 
   function isBlacklisted() {
     const titleBlacklist = keywords.blacklist
