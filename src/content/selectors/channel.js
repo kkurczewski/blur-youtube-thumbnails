@@ -25,7 +25,9 @@ async function channelVideos(root, videoCallback) {
         })
       } else {
         // videos, shorts and live tabs use direct container
-        videoObserver.observe(tab)
+        observeDirectChildrens(tab, content => {
+          videoObserver.observe(content)
+        })
       }
     })
   })
