@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   // on channel page videos doesn't contain channel name, channel name is included only in top header
   channelVideos(pageManager, blur(video => ({
-    title: video.querySelector(VIDEO_SELECTORS.title),
+    title: video.querySelector(`h3 ${VIDEO_LINK}`),
     channel: document.querySelector("#page-manager > ytd-browse[page-subtype=channels] #page-header span"),
   })))
 
