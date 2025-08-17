@@ -1,5 +1,6 @@
 const ITEM_CONTAINER_LOGGED = "#items #contents"
 const ITEM_CONTAINER_ANONYMOUS = "#items:not(:has(#contents))"
+const WATCH_PAGE_CHANNEL = "yt-content-metadata-view-model span"
 
 /**
  * @param {Element} root
