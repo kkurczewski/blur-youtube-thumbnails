@@ -14,7 +14,7 @@
 
 .unblur {
 
-  .blur #thumbnail #mouseover-overlay :hover img,
+  .blur img:hover[src^='https://i.ytimg.com/vi/'],
   .blur:hover .ytp-videowall-still-image,
   #video-preview [playing] video {
     filter: unset;
