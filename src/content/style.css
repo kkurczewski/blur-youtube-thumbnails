@@ -1,7 +1,6 @@
 .blur img[src^='https://i.ytimg.com/vi/'],
 .blur .ytp-videowall-still-image,
-:has(.blur:hover) #video-preview video,
-#video-preview :hover video {
+:has(.blur:hover) #video-preview video {
   --blur: 15px;
 
   filter: blur(var(--blur));
@@ -12,19 +11,15 @@
   transition-duration: 100ms;
 }
 
-.unblur {
+.unblur :is(.blur img[src^='https://i.ytimg.com/vi/']:hover, .blur:hover .ytp-videowall-still-image),
+:has(.unblur):has(.blur:hover) #video-preview [playing] video {
+  filter: unset;
+  -webkit-filter: unset;
 
-  .blur img:hover[src^='https://i.ytimg.com/vi/'],
-  .blur:hover .ytp-videowall-still-image,
-  #video-preview [playing] video {
-    filter: unset;
-    -webkit-filter: unset;
-
-    transition-property: filter, -webkit-filter;
-    transition-delay: 1s;
-    transition-timing-function: ease-in;
-    transition-duration: 3s;
-  }
+  transition-property: filter, -webkit-filter;
+  transition-delay: 1s;
+  transition-timing-function: ease-in;
+  transition-duration: 3s;
 }
 
 /* fix transparency for div-based post-live screen */
