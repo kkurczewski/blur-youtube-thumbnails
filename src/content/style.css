@@ -1,4 +1,3 @@
-.blur #thumbnail .yt-core-image,
 .blur img[src^='https://i.ytimg.com/vi/'],
 .blur .ytp-videowall-still-image,
 :has(.blur:hover) #video-preview video,
@@ -15,7 +14,6 @@
 
 .unblur {
 
-  .blur #thumbnail .yt-core-image:hover,
   .blur #thumbnail #mouseover-overlay :hover img,
   .blur:hover .ytp-videowall-still-image,
   #video-preview [playing] video {
