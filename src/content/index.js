@@ -37,8 +37,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   function blur(selector) {
     /** @param {Element} video */
     return (video) => {
-      const selected = selector(video)
-      const { title, channel } = selected
+      const { title, channel } = selector(video)
       if (title == null) {
         console.error("Title was null:", video)
         return
@@ -47,7 +46,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       video.classList.toggle("blur", enabled)
 
       // return video elements for recycling
-      return selected
+      return { title, channel }
     }
   }
 
