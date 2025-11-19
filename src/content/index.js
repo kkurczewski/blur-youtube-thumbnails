@@ -38,10 +38,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     /** @param {Element} video */
     return (video) => {
       const { title, channel } = selector(video)
-      if (title == null) {
-        console.error("Title was null:", video)
-        return
-      }
+      console.assert(title != null, "Not found title for:", video)
       const enabled = matchKeywords(title.textContent.trim(), channel?.textContent?.trim(), channels, keywords)
       video.classList.toggle("blur", enabled)
 
