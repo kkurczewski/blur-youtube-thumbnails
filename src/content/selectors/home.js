@@ -15,7 +15,7 @@ async function homePageObserver(root, videoCallback) {
     }
   })
 
-  const NON_POSTS = ":scope:not(:has([href^='/post/'],[href^='/channel/']))"
+  const NON_POSTS = ":scope:not(:has([href^='/post/']))"
   const CONTENT_SLOT = "#content:not(:has(#content))"
   observeDirectChildrens(scroll, row => {
     row.querySelectorAll(`${NON_POSTS} ${CONTENT_SLOT}`).forEach(slot => {

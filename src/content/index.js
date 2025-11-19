@@ -1,5 +1,5 @@
 const VIDEO_LINK = "a:is([href^='/watch'],[href^='/shorts'])"
-const CHANNEL_LINK = "a:is([href^='/@'],[href^='/c/'])"
+const CHANNEL_LINK = "a:is([href^='/@'],[href^='/c/'],[href^='/channel/'])"
 
 // generic selector
 const VIDEO_SELECTORS = {
