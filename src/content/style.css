@@ -5,10 +5,6 @@
 
   filter: blur(var(--blur));
   -webkit-filter: blur(var(--blur));
-
-  transition-property: filter, -webkit-filter;
-  transition-timing-function: ease-out;
-  transition-duration: 100ms;
 }
 
 .unblur :is(.blur img[src^='https://i.ytimg.com/vi/']:hover, .blur:hover .ytp-videowall-still-image),
