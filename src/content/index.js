@@ -22,6 +22,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   playlistPageObserver(pageManager, blur(genericSelector))
   watchPlaylistObserver(pageManager, blur(querySelector(WATCH_PLAYLIST_SELECTORS)))
   watchEndscreen(pageManager, blur(querySelector(WATCH_ENDSCREEN_SELECTORS)))
+  watchScrollSuggestions(pageManager, blur(querySelector(WATCH_SCROLL_SELECTORS)))
 
   if (!disableSearch) {
     resultsPageObserver(pageManager, blur(genericSelector))

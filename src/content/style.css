@@ -1,5 +1,6 @@
 .blur img[src^='https://i.ytimg.com/vi/'],
 .blur .ytp-videowall-still-image,
+.blur .ytp-modern-videowall-still-image,
 :has(.blur:hover) #video-preview video {
   --blur: 15px;
 
@@ -7,7 +8,11 @@
   -webkit-filter: blur(var(--blur));
 }
 
-.unblur :is(.blur img[src^='https://i.ytimg.com/vi/']:hover, .blur:hover .ytp-videowall-still-image),
+.unblur :is(
+  .blur img[src^='https://i.ytimg.com/vi/']:hover,
+  .blur:hover .ytp-videowall-still-image,
+  .blur:hover .ytp-modern-videowall-still-image,
+),
 :has(.unblur):has(.blur:hover) #video-preview [playing] video {
   filter: unset;
   -webkit-filter: unset;

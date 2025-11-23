@@ -43,3 +43,20 @@ async function watchEndscreen(root, videoCallback) {
     }
   })
 }
+
+const WATCH_SCROLL_SELECTORS = {
+  channel: ".ytp-modern-videowall-still-info-author",
+  title: ".ytp-modern-videowall-still-info-title",
+}
+
+// watch page, bottom-scroll suggestions
+/**
+ * @param {Element} root
+ * @param {VideoCallback} videoCallback 
+ */
+async function watchScrollSuggestions(root, videoCallback) {
+  const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
+  const player = await find(pageRoot, "#movie_player")
+
+  player.querySelectorAll(".ytp-fullscreen-grid a[href*='/watch']").forEach(videoCallback)
+}
