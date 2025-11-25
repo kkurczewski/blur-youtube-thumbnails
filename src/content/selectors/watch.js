@@ -57,6 +57,6 @@ const WATCH_SCROLL_SELECTORS = {
 async function watchScrollSuggestions(root, videoCallback) {
   const pageRoot = await find(root, "#page-manager > ytd-watch-flexy")
   const player = await find(pageRoot, "#movie_player")
-
-  player.querySelectorAll(".ytp-fullscreen-grid a[href*='/watch']").forEach(videoCallback)
+  const container = player.querySelector(".ytp-fullscreen-grid-stills-container")
+  observeDirectChildrens(container, videoCallback)
 }
